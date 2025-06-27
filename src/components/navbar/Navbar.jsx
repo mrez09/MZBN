@@ -30,12 +30,14 @@ const Navbar = () => {
       </div>
       */}
         <div className={styles.logo}>
-          <Image
-            className={styles.logoImage}
-            src="/Logo-MZ.png"
-            width={250}
-            height={75}
-          />
+          <Link href="/">
+            <Image
+              className={styles.logoImage}
+              src="/Logo-MZ.png"
+              width={250}
+              height={75}
+            />
+          </Link>
         </div>
         <div className={styles.links}>
           <ThemeToggle />
