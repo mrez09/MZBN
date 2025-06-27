@@ -12,7 +12,7 @@
 /.next/
 /out/
 
-# production
+# untuk production
 /build
 
 # misc
