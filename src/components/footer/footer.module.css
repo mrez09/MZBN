@@ -1,0 +1,125 @@
+.container {
+  margin-top: 50px;
+  padding: 20px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--softTextColor);
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoImage {
+  border-bottom: 3px solid #4682a9;
+  width: max-content;
+  padding: 2px 0px;
+}
+.logoText {
+  font-size: 24px;
+}
+
+.desc {
+  font-weight: 300;
+}
+
+.icons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.socialIcons {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  border-radius: 30%;
+  justify-content: center;
+  cursor: pointer;
+}
+.socialIcons:hover {
+  background-color: #4682a9;
+}
+.FaSocial {
+  width: 20px;
+  height: 20px;
+}
+
+.links {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 100px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 300;
+}
+
+.listTitle {
+  font-weight: bold;
+  border-bottom: 3px solid #4682a9;
+  width: max-content;
+  padding: 2px 0px;
+}
+
+/** Address */
+.address {
+  display: flex;
+  align-items: center; /* untuk sejajarkan vertikal */
+  gap: 8px; /* jarak antara icon dan text */
+}
+
+.FaIcon {
+  color: #4682a9;
+  font-size: 20px;
+}
+
+/* Dark And Light */
+
+.dark {
+  background-color: #f1f5f9;
+  column-rule: red;
+  color: #1e293b;
+}
+
+.light {
+  background-color: #1e293b;
+  color: white;
+}
+
+@media screen and (max-width: 1024px) {
+  .links {
+    gap: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .links {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+@media screen and (max-width: 640px) {
+  .links {
+    font-size: 14px;
+  }
+}

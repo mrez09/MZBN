@@ -1,0 +1,130 @@
+/* Test Navbar*/
+.container {
+  align-items: center;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  padding: 0 40px; /* tambahkan padding kiri-kanan */
+  background-color: #f8fafc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* wrapper test*/
+.wrapper {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #1e293b;
+  flex-shrink: 0; /* jangan mengecil */
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-left: auto; /* dorong ke kanan */
+  flex-shrink: 0;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 20px;
+}
+
+.logoImage {
+  width: 250px;
+  height: 75px;
+  justify-content: left;
+}
+/*Dark Light*/
+.dark {
+  background-color: blue;
+  column-rule: red;
+}
+
+.light {
+  background-color: red;
+  color: blue;
+}
+
+/* social use?*/
+.clear {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+}
+
+.logo {
+  flex: 1;
+  text-align: left;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+/**
+@media screen and (max-width: 1920px) {
+  .logo {
+    font-size: 32px;
+  }
+  .clear {
+    display: none;
+  }
+  .links {
+    font-size: 18px;
+    gap: 15px;
+  }
+}
+  **/
+
+@media screen and (max-width: 1280px) {
+  .logo {
+    font-size: 32px;
+  }
+  .clear {
+    display: none;
+  }
+  .links {
+    font-size: 18px;
+    gap: 15px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .clear {
+    display: none;
+  }
+  .logo {
+    text-align: left;
+  }
+}
+@media screen and (max-width: 768px) {
+  .logo {
+    font-size: 24px;
+  }
+}
+@media screen and (max-width: 640px) {
+  .links {
+    justify-content: flex-end;
+  }
+  .link {
+    display: none;
+  }
+}
