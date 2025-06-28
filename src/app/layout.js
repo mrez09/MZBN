@@ -5,6 +5,7 @@ import Footer from "@/components/footer/Footer";
 import { ThemeContextProvider } from "@/context/ThemeContext";
 import ThemeProvider from "@/providers/ThemeProvider";
 import Head from "next/head";
+import AuthProvider from "@/context/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,17 +27,19 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon-mrez.png" type="image/ico" />
       </Head>
       <body className={inter.className}>
-        <ThemeContextProvider>
-          <ThemeProvider>
-            <div className="container">
-              <div className="wrapper">
-                <Navbar />
-                {children}
-                <Footer />
+        <AuthProvider>
+          <ThemeContextProvider>
+            <ThemeProvider>
+              <div className="container">
+                <div className="wrapper">
+                  <Navbar />
+                  {children}
+                  <Footer />
+                </div>
               </div>
-            </div>
-          </ThemeProvider>
-        </ThemeContextProvider>
+            </ThemeProvider>
+          </ThemeContextProvider>
+        </AuthProvider>
       </body>
     </html>
   );

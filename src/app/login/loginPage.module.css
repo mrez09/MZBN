@@ -120,3 +120,33 @@
   color: white;
   transform: rotateY(180deg);
 }
+
+/*Loading*/
+
+.loader {
+  border: 8px solid #333;
+  border-top: 8px solid #00ffff;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  z-index: 999;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Optional: add loading text */
+.loadingText {
+  color: #fff;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+}
