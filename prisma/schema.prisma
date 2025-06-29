@@ -97,13 +97,26 @@ model Category {
   Posts Post[]
 }
 
+/*no Rela S
+model Post {
+  id        String   @id @default(cuid()) @map("_id")
+  title     String
+  desc      String
+  slug      String   @unique
+  catSlug   String
+  image     String?
+  userEmail String
+  createdAt DateTime @default(now())
+
+}*/
+/* Relasi */
 model Post {
   id        String @id @default(cuid()) @map("_id")
   createdAt DateTime @default(now())
   slug      String @unique
   title     String
   desc      String
-  img       String?
+  image     String?
   views     Int @default(0)
   catSlug   String
   cat       Category  @relation(fields: [catSlug], references: [slug])
