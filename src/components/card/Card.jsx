@@ -3,27 +3,29 @@ import styles from "./card.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-const Card = () => {
+const Card = ({ key, item }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} key={key}>
       <div className={styles.imageContainer}>
         <Image className={styles.image} src="/samp1.png" alt="Sample 1" fill />
       </div>
       <div className={styles.textContainer}>
         <div className={styles.detail}>
-          <span className={styles.date}>20-02-2025 - </span>
-          <span className={styles.category}>Website</span>
+          <span className={styles.date}>
+            {item.createdAt.substring(0, 10)} -{" "}
+          </span>
+          <Link className={styles.desc} href={`/blog?cat=${item.catSlug}`}>
+            <span className={styles.category}>{item.catSlug}</span>
+          </Link>
         </div>
-        <Link className={styles.desc} href="/">
-          <h1>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h1>
+        <Link className={styles.desc} href={`/${item.title}`}>
+          <h1>{item.title}</h1>
         </Link>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
-          aperiam a quod alias, excepturi incidunt modi reiciendis neque
-          officiis repellat vero earum quisquam impedit. Eius quos voluptatem
-          libero quod similique?
-        </p>
-        <Link className={styles.link} href="/">
+        <div
+          className={styles.desc}
+          dangerouslySetInnerHTML={{ __html: item?.desc.substring(0, 150) }}
+        />
+        <Link className={styles.link} href={`/${item.title}`}>
           Read More
         </Link>
       </div>

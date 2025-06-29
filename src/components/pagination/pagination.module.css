@@ -7,7 +7,12 @@
   width: 100px;
   border: none;
   padding: 16px;
-  background-color: #4682A9;
+  background-color: #4682a9;
   color: white;
   cursor: pointer;
+}
+
+.button:disabled {
+  background-color: #749bc2;
+  cursor: not-allowed;
 }
