@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "./menuPosts.module.css";
+import styles from "./menuPick.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import WaktuUpload from "../time/waktuUpload";
 
 const getData = async (page, cat) => {
   const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
-  const res = await fetch("http://localhost:3000/api/popular", {
+  const res = await fetch("http://localhost:3000/api/pick", {
     cache: "no-store",
   });
 
@@ -17,7 +17,7 @@ const getData = async (page, cat) => {
   return res.json();
 };
 
-const MenuPosts = async ({ withImage }) => {
+const MenuPick = async ({ withImage }) => {
   const data = await getData();
 
   return (
@@ -53,4 +53,4 @@ const MenuPosts = async ({ withImage }) => {
   );
 };
 
-export default MenuPosts;
+export default MenuPick;

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import MenuPosts from "../MenuPosts/MenuPosts";
 import MenuCategories from "../MenuCategories/MenuCategories";
+import MenuPick from "../MenuPick/MenuPick";
 
 const Menu = () => {
   return (
@@ -18,7 +19,7 @@ const Menu = () => {
 
       <h2 className={styles.subtitle}>Chosen by the Editor</h2>
       <h1 className={styles.title}>Editor Pick</h1>
-      <MenuPosts withImage={false} />
+      <MenuPick withImage={false} />
     </div>
   );
 };

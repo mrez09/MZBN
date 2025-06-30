@@ -32,6 +32,12 @@ export const GET = async () => {
             name: true, // Ambil hanya nama user
           },
         },
+        cat: {
+          select: {
+            title: true, // Ambil hanya nama user
+            slug: true,
+          },
+        },
       },
     });
 

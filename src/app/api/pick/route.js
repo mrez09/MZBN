@@ -17,19 +17,27 @@ export const GET = async () => {
   try {
     const popular = await prisma.post.findMany({
       orderBy: {
-        views: "desc", // Urutkan dari views terbesar
+        createdAt: "desc", // Urutkan dari views terbesar
       },
       where: {
         createdAt: {
           gte: lastMonth,
           lt: today,
         },
+        isFeatured: true,
       },
-      take: 5, // Ambil 5 teratas saja
+
+      take: 3, // Ambil 5 teratas saja
       include: {
         user: {
           select: {
             name: true, // Ambil hanya nama user
+          },
+        },
+        cat: {
+          select: {
+            title: true, // Ambil hanya nama user
+            slug: true,
           },
         },
       },
