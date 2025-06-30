@@ -1,3 +1,4 @@
+//Corewebvitals
 {
   "extends": "next/core-web-vitals"
 }
