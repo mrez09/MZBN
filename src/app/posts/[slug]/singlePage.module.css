@@ -96,3 +96,46 @@
     font-size: 18px;
   }
 }
+
+/*Page Post Input*/
+
+.content {
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.content p {
+  margin-bottom: 1em;
+  text-align: justify;
+}
+.content ul {
+  padding-left: 2em;
+  list-style-type: disc;
+  margin-bottom: 1em;
+}
+
+.content li {
+  margin-bottom: 0.5em;
+}
+.content strong {
+  font-weight: bold;
+  color: #4682a9;
+}
+
+.content em {
+  font-style: italic;
+}
+
+/* sementara dimatikan
+.content a {
+  color: #4fd1c5;
+  text-decoration: underline;
+}
+
+.content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+  */
