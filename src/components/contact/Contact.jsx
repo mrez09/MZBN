@@ -1,11 +1,58 @@
 "use state";
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import styles from "./contact.module.css";
 import { FaClock, FaMapLocation, FaPhone } from "react-icons/fa6";
 import { ThemeContext } from "@/context/ThemeContext";
+import emailjs from "@emailjs/browser";
+import { ToastContainer, toast } from "react-toastify";
 
 const Contact = () => {
   const { toggle, theme } = useContext(ThemeContext);
+  const form = useRef();
+  const [isSent, setIsSent] = useState(false);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_c5yvgxh", //Your EmailJS Service ID
+        "template_a3awzco", //Your EmailJS Template ID
+
+        form.current,
+        "WP9aiC8A8ISlfHtE5"
+      )
+      .then(
+        () => {
+          setIsSent(true);
+          form.current.reset(); // Reset form fields after sending
+          toast.success(
+            "Message sent successfully! ✅ Please wait for our feedback. Thank you.",
+            {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            }
+          );
+        },
+        (error) => {
+          console.error("Error sending message:", error);
+          toast.error("Failed to send message. Please try again.", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
+        }
+      );
+  };
   return (
     <div className={styles.wrapper}>
       {/* Kiri: Info Kontak */}
@@ -84,16 +131,16 @@ const Contact = () => {
         >
           Ready to Get Started?
         </h3>
+        {/* Toast Container */}
+        <ToastContainer />
         <form
+          ref={form}
+          onSubmit={sendEmail}
           className={`${styles.formRetro} ${
             theme === "dark" ? styles.RetroDark : styles.RetroLight
           }`}
         >
-          <h2
-            className={theme === "dark" ? styles.RetroDark : styles.RetroLight}
-          >
-            Connect With Me
-          </h2>
+          <h2>Connect With Me</h2>
 
           <label htmlFor="name">Email</label>
           <input

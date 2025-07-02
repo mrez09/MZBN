@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
+    "@emailjs/browser": "^4.4.1",
     "@prisma/client": "^6.10.1",
     "date-fns": "^4.1.0",
     "eslint": "8.48.0",
@@ -22,6 +23,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^5.5.0",
     "react-quill": "^2.0.0",
+    "react-toastify": "^11.0.5",
     "swr": "^2.3.3"
   },
   "devDependencies": {
