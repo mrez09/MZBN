@@ -1,11 +1,13 @@
 "use client";
-export const dynamic = "force-dynamic"; // ✅ FIX Next build error on document
+import dynamic from "next/dynamic";
+
+//export const dynamic = "force-dynamic"; // ✅ FIX Next build error on document
 
 import React, { useEffect, useState } from "react";
 import styles from "./write.module.css";
 
 import { FaFile, FaImage, FaPlus, FaVideo, FaYoutube } from "react-icons/fa6";
-import ReactQuill from "react-quill";
+//import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -13,6 +15,7 @@ import { useSession } from "next-auth/react";
 const Writepage = () => {
   const { status } = useSession();
   const router = useRouter();
+  const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState(null);
