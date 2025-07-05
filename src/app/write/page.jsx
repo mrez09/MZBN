@@ -8,14 +8,16 @@ import styles from "./write.module.css";
 
 import { FaFile, FaImage, FaPlus, FaVideo, FaYoutube } from "react-icons/fa6";
 //import ReactQuill from "react-quill";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+
 import "react-quill/dist/quill.snow.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 const Writepage = () => {
   const { status } = useSession();
+
   const router = useRouter();
-  const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState(null);
