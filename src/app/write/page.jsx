@@ -1,4 +1,6 @@
 "use client";
+export const dynamic = "force-dynamic"; // ✅ FIX Next build error on document
+
 import React, { useEffect, useState } from "react";
 import styles from "./write.module.css";
 
@@ -45,7 +47,7 @@ const Writepage = () => {
       });
 
       const data = await res.json();
-      console.log("🧪 Post response:", data); // Debug
+      console.log("🧪 Post response:", data);
 
       if (res.ok) {
         router.push(`/posts/${data.slug}`);
