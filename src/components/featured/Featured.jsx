@@ -22,32 +22,34 @@ const Featured = async () => {
   return (
     <>
       {data?.map((item) => (
-        <div className={styles.container} key={item.id}>
-          <h1 className={styles.title}>
-            <b>Hey, Iam MreZ Here!</b> Discover my stories and creative ideas.
-          </h1>
+        <React.Fragment key={item.id}>
+          <div className={styles.container}>
+            <h1 className={styles.title}>
+              <b>Hey, Iam MreZ Here!</b> Discover my stories and creative ideas.
+            </h1>
 
-          <div className={styles.post}>
-            <div className={styles.imgContainer}>
-              <Image className={styles.image} src={item.image} alt="" fill />
-            </div>
-            <div className={styles.textContainer}>
-              <h1 className={styles.postTitle}>{item.title}</h1>
-              <span className={`${styles.categoryItem} ${styles[item.slug]}`}>
-                {item.cat.title}
-              </span>
-              <div
-                className={styles.description}
-                dangerouslySetInnerHTML={{
-                  __html: item.desc.substring(0, 150),
-                }}
-              />
-              <Link href={`/posts/${item.slug}`}>
-                <button className={styles.button}>Read More</button>
-              </Link>
+            <div className={styles.post}>
+              <div className={styles.imgContainer}>
+                <Image className={styles.image} src={item.image} alt="" fill />
+              </div>
+              <div className={styles.textContainer}>
+                <h1 className={styles.postTitle}>{item.title}</h1>
+                <span className={`${styles.categoryItem} ${styles[item.slug]}`}>
+                  {item.cat.title}
+                </span>
+                <div
+                  className={styles.description}
+                  dangerouslySetInnerHTML={{
+                    __html: item.desc.substring(0, 150),
+                  }}
+                />
+                <Link href={`/posts/${item.slug}`}>
+                  <button className={styles.button}>Read More</button>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        </React.Fragment>
       ))}
     </>
   );
