@@ -23,7 +23,7 @@ const MenuPosts = async ({ withImage }) => {
   return (
     <div className={styles.items}>
       {data?.map((item) => (
-        <Link className={styles.item} href="/">
+        <Link className={styles.item} href="/" key={item.id}>
           {withImage && (
             <div className={styles.imageContainer}>
               <Image

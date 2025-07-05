@@ -22,7 +22,7 @@ const Featured = async () => {
   return (
     <>
       {data?.map((item) => (
-        <div className={styles.container}>
+        <div className={styles.container} key={item.id}>
           <h1 className={styles.title}>
             <b>Hey, Iam MreZ Here!</b> Discover my stories and creative ideas.
           </h1>
