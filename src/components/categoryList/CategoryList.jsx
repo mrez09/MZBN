@@ -5,12 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 const getData = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/categories`,
-    {
-      cache: "no-store",
-    }
-  );
+  const res = await fetch("https://mzbnext.vercel.app/api/categories", {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
     throw new Error("Failed");
