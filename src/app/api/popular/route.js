@@ -1,7 +1,5 @@
 import prisma from "@/utils/connect";
 import { NextResponse } from "next/server";
-import ImageKit from "imagekit";
-import { getAuthSession } from "@/utils/auth";
 //import { getUploadAuthParams } from "@imagekit/next/server"
 
 export const GET = async () => {
