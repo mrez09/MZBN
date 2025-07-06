@@ -3,17 +3,16 @@ import React from "react";
 import styles from "./categoryList.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import prisma from "@/utils/connect";
 
 const getData = async () => {
-  const res = await fetch("https://mzbnext.vercel.app/api/categories", {
-    cache: "no-store",
+  const categories = await prisma.category.findMany({
+    take: 6,
+    orderBy: {
+      id: "desc",
+    },
   });
-
-  if (!res.ok) {
-    throw new Error("Failed");
-  }
-
-  return res.json();
+  return categories;
 };
 
 const CategoryList = async () => {

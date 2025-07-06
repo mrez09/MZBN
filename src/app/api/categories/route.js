@@ -1,6 +1,6 @@
 import prisma from "@/utils/connect";
 import { NextResponse } from "next/server";
-export const dynamic = "force-dynamic"; //paksa dynamix
+export const dynamic = "force-dynamic";
 
 export const GET = async () => {
   const skip = Math.floor(1);
