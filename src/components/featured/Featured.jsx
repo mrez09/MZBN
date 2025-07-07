@@ -3,25 +3,25 @@ import styles from "./featured.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-//const getData = async (page, cat) => {
-//const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
-//const res = await fetch("http://localhost:3000/api/featured", {
-//  cache: "no-store",
-//});
+const getData = async (page, cat) => {
+  const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/featured`, {
+    cache: "no-store",
+  });
 
-//if (!res.ok) {
-//  throw new Error("Failed");
-//}
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
 
-//return res.json();
-//};
+  return res.json();
+};
 
 const Featured = async () => {
-  //const data = await getData();
+  const data = await getData();
 
   return (
     <>
-      {/*data?.map((item) => (
+      {data?.map((item) => (
         <React.Fragment key={item.id}>
           <div className={styles.container}>
             <h1 className={styles.title}>
@@ -50,7 +50,7 @@ const Featured = async () => {
             </div>
           </div>
         </React.Fragment>
-      ))*/}
+      ))}
     </>
   );
 };
