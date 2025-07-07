@@ -3,6 +3,7 @@ import styles from "./singlePage.module.css";
 import Image from "next/image";
 import Menu from "@/components/Menu/Menu";
 import Comments from "@/components/comments/Comments";
+export const dynamic = "force-dynamic";
 
 /*const getData = async (slug) => {
   const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {

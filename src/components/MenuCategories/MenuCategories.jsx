@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./menuCategories.module.css";
 import Link from "next/link";
+export const dynamic = "force-dynamic";
 
 /*const getData = async () => {
   const res = await fetch(

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./cardList.module.css";
 import Pagination from "../pagination/Pagination";
-
+export const dynamic = "force-dynamic";
 import Card from "../card/Card";
 
 const getData = async (page, cat) => {

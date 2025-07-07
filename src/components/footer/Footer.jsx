@@ -15,6 +15,7 @@ import {
 } from "react-icons/fa6";
 import { RiMapPinFill } from "react-icons/ri";
 import { ThemeContext } from "@/context/ThemeContext";
+export const dynamic = "force-dynamic";
 
 const Footer = () => {
   const { toggle, theme } = useContext(ThemeContext);

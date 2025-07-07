@@ -2,6 +2,7 @@
 import React from "react";
 import styles from "./pagination.module.css";
 import { useRouter } from "next/navigation";
+export const dynamic = "force-dynamic";
 
 const Pagination = ({ page, hasPrev, hasNext }) => {
   const router = useRouter();

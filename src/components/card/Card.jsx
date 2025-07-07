@@ -3,6 +3,7 @@ import styles from "./card.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import WaktuUpload from "../time/waktuUpload";
+export const dynamic = "force-dynamic";
 
 const baseURL = "https://ik.imagekit.io/uv0kfnhyiv/";
 const Card = ({ key, item }) => {
