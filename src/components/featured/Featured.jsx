@@ -3,22 +3,30 @@ import React from "react";
 import styles from "./featured.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const getData = async (page, cat) => {
-  const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/featured`, {
-    cache: "no-store",
-  });
+//const getData = async (page, cat) => {
+//const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
+//  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/featured`, {
+//    cache: "no-store",
+//  });
 
-  if (!res.ok) {
-    throw new Error("Failed");
-  }
+//  if (!res.ok) {
+//    throw new Error("Failed");
+//  }
 
-  return res.json();
-};
+//  return res.json();
+//};
 
 const Featured = async () => {
   //const data = await getData();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/featured`)
+      .then((res) => res.json())
+      .then(setData);
+  }, []);
 
   return (
     <>
