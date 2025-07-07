@@ -13,7 +13,6 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-export const dynamic = "force-dynamic";
 
 const Writepage = () => {
   const { status } = useSession();
