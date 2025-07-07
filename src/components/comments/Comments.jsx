@@ -6,18 +6,18 @@ import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
-const fetcher = async (url) => {
-  const res = await fetch(url);
+//const fetcher = async (url) => {
+//  const res = await fetch(url);
 
-  const data = await res.json();
+//  const data = await res.json();
 
-  if (!res.ok) {
-    const error = new Error(data.message);
-    throw error;
-  }
+//  if (!res.ok) {
+//    const error = new Error(data.message);
+//    throw error;
+//  }
 
-  return data;
-};
+//  return data;
+// };
 
 const Comments = ({ postSlug }) => {
   const { status } = useSession();
