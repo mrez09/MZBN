@@ -23,8 +23,9 @@ const Comments = ({ postSlug }) => {
   const { status } = useSession();
 
   const { data, mutate, isLoading } = useSWR(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/comments?postSlug=${postSlug}`,
-    fetcher
+    `/api/comments?postSlug=${postSlug}`,
+    fetcher,
+    { revalidateOnMount: false }
   );
 
   const [desc, setDesc] = useState("");
@@ -32,7 +33,7 @@ const Comments = ({ postSlug }) => {
   const handleSubmit = async () => {
     if (!desc.trim()) return; // Cegah kirim kosong
 
-    await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/comments`, {
+    await fetch(`/api/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // penting!
