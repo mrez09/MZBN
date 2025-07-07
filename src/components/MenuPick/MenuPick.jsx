@@ -3,9 +3,8 @@ import styles from "./menuPick.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import WaktuUpload from "../time/waktuUpload";
-export const dynamic = "force-dynamic";
 
-/*const getData = async (page, cat) => {
+const getData = async (page, cat) => {
   const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/pick`, {
     cache: "no-store",
@@ -16,14 +15,14 @@ export const dynamic = "force-dynamic";
   }
 
   return res.json();
-};*/
+};
 
 const MenuPick = async ({ withImage }) => {
-  //const data = await getData();
+  const data = await getData();
 
   return (
     <div className={styles.items}>
-      {/*data?.map((item) => (
+      {data?.map((item) => (
         <Link className={styles.item} href="/">
           {withImage && (
             <div className={styles.imageContainer}>
@@ -49,7 +48,7 @@ const MenuPick = async ({ withImage }) => {
             </div>
           </div>
         </Link>
-      ))*/}
+      ))}
     </div>
   );
 };

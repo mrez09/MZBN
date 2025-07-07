@@ -1,9 +1,8 @@
 import React from "react";
 import styles from "./menuCategories.module.css";
 import Link from "next/link";
-export const dynamic = "force-dynamic";
 
-/*const getData = async () => {
+const getData = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/categories`,
     {
@@ -16,13 +15,13 @@ export const dynamic = "force-dynamic";
   }
 
   return res.json();
-};*/
+};
 
 const MenuCategories = async () => {
   const data = await getData();
   return (
     <div className={styles.categoryList}>
-      {/*data?.map((item) => (
+      {data?.map((item) => (
         <Link
           className={`${styles.categoryItem} ${styles[item.slug]}`}
           href={`/blog?cat=${item.slug}`}
@@ -30,7 +29,7 @@ const MenuCategories = async () => {
         >
           {item.title}
         </Link>
-      ))*/}
+      ))}
     </div>
   );
 };

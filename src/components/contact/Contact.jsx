@@ -5,7 +5,6 @@ import { FaClock, FaMapLocation, FaPhone } from "react-icons/fa6";
 import { ThemeContext } from "@/context/ThemeContext";
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
-export const dynamic = "force-dynamic";
 
 const Contact = () => {
   const { toggle, theme } = useContext(ThemeContext);

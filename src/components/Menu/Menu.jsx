@@ -5,7 +5,6 @@ import Image from "next/image";
 import MenuPosts from "../MenuPosts/MenuPosts";
 import MenuCategories from "../MenuCategories/MenuCategories";
 import MenuPick from "../MenuPick/MenuPick";
-export const dynamic = "force-dynamic";
 
 const Menu = () => {
   return (

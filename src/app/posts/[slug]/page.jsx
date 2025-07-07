@@ -3,9 +3,8 @@ import styles from "./singlePage.module.css";
 import Image from "next/image";
 import Menu from "@/components/Menu/Menu";
 import Comments from "@/components/comments/Comments";
-export const dynamic = "force-dynamic";
 
-/*const getData = async (slug) => {
+const getData = async (slug) => {
   const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
     cache: "no-store",
   });
@@ -16,22 +15,18 @@ export const dynamic = "force-dynamic";
 
   return res.json();
 };
-*/
-const SinglePage = async ({ params }) => {
-  //const { slug } = params;
 
-  //const data = await getData(slug);
+const SinglePage = async ({ params }) => {
+  const { slug } = params;
+
+  const data = await getData(slug);
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.textContainer}>
-          <h1>
-            {
-              //data?.title
-            }
-          </h1>
+          <h1>{data?.title}</h1>
           <div className={styles.user}>
-            {/*data?.user?.image && (
+            {data?.user?.image && (
               <div className={styles.userImageContainer}>
                 <Image
                   src={data.user.image}
@@ -40,7 +35,7 @@ const SinglePage = async ({ params }) => {
                   className={styles.avatar}
                 />
               </div>
-            )*/}
+            )}
             <div className={styles.userTextContainer}>
               <span className={styles.username}>
                 {
@@ -66,14 +61,10 @@ const SinglePage = async ({ params }) => {
             />
           </div>
           <div className={styles.comment}>
-            {
-              //<Comments postSlug={slug} />
-            }
+            <Comments postSlug={slug} />
           </div>
         </div>
-        {
-          //<Menu />
-        }
+        <Menu />
       </div>
     </div>
   );

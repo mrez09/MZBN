@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./featured.module.css";
 import Image from "next/image";
 import Link from "next/link";
-export const dynamic = "force-dynamic";
 
 //const getData = async (page, cat) => {
 //const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini

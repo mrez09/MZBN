@@ -3,7 +3,6 @@ import styles from "./menuPosts.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import WaktuUpload from "../time/waktuUpload";
-export const dynamic = "force-dynamic";
 
 const getData = async (page, cat) => {
   const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini

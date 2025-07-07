@@ -14,7 +14,7 @@ export const GET = async () => {
     const shuffled = categories.sort(() => 0.5 - Math.random());
     const categoriesacak = shuffled.slice(0, 6);
 
-    return new NextResponse(JSON.stringify(categoriesacak, { status: 200 }));
+    return new NextResponse(JSON.stringify(categoriesacak), { status: 200 });
   } catch (err) {
     console.log(err);
     return new NextResponse(

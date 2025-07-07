@@ -5,7 +5,6 @@ import Image from "next/image";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-export const dynamic = "force-dynamic";
 
 const fetcher = async (url) => {
   const res = await fetch(url);

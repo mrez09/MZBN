@@ -6,7 +6,6 @@ import Link from "next/link";
 import AuthLinks from "../authLinks/AuthLinks";
 import ThemeToggle from "../themeToggle/ThemeToggle";
 import { ThemeContext } from "@/context/ThemeContext";
-export const dynamic = "force-dynamic";
 
 const Navbar = () => {
   const { toggle, theme } = useContext(ThemeContext);
