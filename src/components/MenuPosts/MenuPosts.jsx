@@ -6,7 +6,7 @@ import WaktuUpload from "../time/waktuUpload";
 
 const getData = async (page, cat) => {
   const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
-  const res = await fetch("http://localhost:3000/api/popular", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/popular`, {
     cache: "no-store",
   });
 

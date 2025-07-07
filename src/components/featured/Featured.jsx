@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const getData = async (page, cat) => {
   const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
-  const res = await fetch("http://localhost:3000/api/featured", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/featured`, {
     cache: "no-store",
   });
 
