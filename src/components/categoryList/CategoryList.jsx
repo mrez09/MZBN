@@ -22,7 +22,7 @@ const CategoryList = async () => {
     <div className={styles.container}>
       <h1 className={styles.title}>Popular Categories</h1>
       <div className={styles.categories}>
-        {data?.map((item) => (
+        {/*data?.map((item) => (
           <Link
             //href="blog?cat=html"
             href={`/blog?cat=${item.slug}`}
@@ -38,7 +38,7 @@ const CategoryList = async () => {
             ></Image>
             {item.title}
           </Link>
-        ))}
+        ))*/}
       </div>
     </div>
   );

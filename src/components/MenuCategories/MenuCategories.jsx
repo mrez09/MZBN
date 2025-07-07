@@ -18,7 +18,7 @@ const MenuCategories = async () => {
   //const data = await getData();
   return (
     <div className={styles.categoryList}>
-      {data?.map((item) => (
+      {/*data?.map((item) => (
         <Link
           className={`${styles.categoryItem} ${styles[item.slug]}`}
           href={`/blog?cat=${item.slug}`}
@@ -26,7 +26,7 @@ const MenuCategories = async () => {
         >
           {item.title}
         </Link>
-      ))}
+      ))*/}
     </div>
   );
 };
