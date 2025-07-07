@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import styles from "./featured.module.css";
 import Image from "next/image";
@@ -17,7 +18,7 @@ const getData = async (page, cat) => {
 };
 
 const Featured = async () => {
-  const data = await getData();
+  //const data = await getData();
 
   return (
     <>
