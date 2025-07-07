@@ -14,8 +14,10 @@ export default function Home({ searchParams }) {
       <Featured />
       <CategoryList />
       <div className={styles.content}>
-        <CardList page={page}/>
-        <Menu />
+        {
+          //<CardList page={page}/>
+          //<Menu />
+        }
       </div>
     </div>
   );
