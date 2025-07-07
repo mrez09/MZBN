@@ -3,9 +3,12 @@ import styles from "./menuCategories.module.css";
 import Link from "next/link";
 
 const getData = async () => {
-  const res = `${process.env.NEXT_PUBLIC_SITE_URL}/api/categories`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/categories`,
+    {
+      cache: "no-store",
+    }
+  );
 
   if (!res.ok) {
     throw new Error("Failed");
