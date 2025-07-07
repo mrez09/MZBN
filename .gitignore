@@ -12,6 +12,10 @@
 /.next/
 /out/
 
+# Sembunyikan API 
+/app/api/categories/
+/app/api/comment/
+
 # untuk production.
 /build
 
