@@ -17,7 +17,7 @@ import Image from "next/image";
 //};
 
 const CategoryList = async () => {
-  const data = await getData();
+  //const data = await getData();
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Popular Categories</h1>

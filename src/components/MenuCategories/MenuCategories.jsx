@@ -15,7 +15,7 @@ import Link from "next/link";
 //};
 
 const MenuCategories = async () => {
-  const data = await getData();
+  //const data = await getData();
   return (
     <div className={styles.categoryList}>
       {data?.map((item) => (
