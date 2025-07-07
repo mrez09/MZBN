@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 //  return res.json();
 //};
 
-const Featured = async () => {
+const Featured = () => {
   //const data = await getData();
   const [data, setData] = useState([]);
 
