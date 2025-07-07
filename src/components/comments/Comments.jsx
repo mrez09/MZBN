@@ -32,7 +32,7 @@ const Comments = ({ postSlug }) => {
   const handleSubmit = async () => {
     if (!desc.trim()) return; // Cegah kirim kosong
 
-    await fetch("/api/comments", {
+    await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // penting!
