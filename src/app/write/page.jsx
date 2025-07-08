@@ -1,21 +1,24 @@
 "use client";
 import dynamic from "next/dynamic";
-
 //export const dynamic = "force-dynamic"; // ✅ FIX Next build error on document
-
 import React, { useEffect, useState } from "react";
 import styles from "./write.module.css";
-
 import { FaFile, FaImage, FaPlus, FaVideo, FaYoutube } from "react-icons/fa6";
 //import ReactQuill from "react-quill";
+import CategorySelect from "@/components/admin/posts/categoriesSelect";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 import "react-quill/dist/quill.snow.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
+//date picker
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 const Writepage = () => {
   const { status } = useSession();
+  const [startDate, setStartDate] = useState(new Date());
 
   const router = useRouter();
 
@@ -24,6 +27,7 @@ const Writepage = () => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [catSlug, setCatSlug] = useState("");
+  const [isFeatured, setisFeatured] = useState("");
 
   if (status === "loading") {
     return <div className={styles.loading}>Loading...</div>;
@@ -42,7 +46,8 @@ const Writepage = () => {
     formData.append("title", title);
     formData.append("desc", value);
     formData.append("slug", slugify(title));
-    formData.append("catSlug", catSlug || "html");
+    formData.append("catSlug", catSlug);
+    formData.append("isFeatured", isFeatured);
     if (file) formData.append("file", file);
 
     try {
@@ -66,12 +71,51 @@ const Writepage = () => {
 
   return (
     <div className={styles.container}>
-      <input
-        type="text"
-        placeholder="Write Title..."
-        className={styles.input}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+      <div className={styles.form_title}>
+        <label htmlFor="date" className={styles.label}>
+          Title
+        </label>
+        <input
+          type="text"
+          placeholder="Write Title..."
+          className={styles.title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <div className={styles.form_group}>
+        <div className={styles.row}>
+          <CategorySelect onChange={(e) => setCatSlug(e.target.value)} />
+          {/* Date Input */}
+          <div className={styles.group}>
+            <label htmlFor="date" className={styles.label}>
+              Select Date
+            </label>
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              dateFormat="yyyy-MM-dd"
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.group}>
+            <label htmlFor="date" className={styles.label}>
+              Is Featured
+            </label>
+            <select
+              className={styles.select}
+              id="isFeatured"
+              name="isFeatured"
+              onChange={(e) => setisFeatured(e.target.isFeatured)}
+            >
+              <option value="" disabled>
+                -- Pilih Kategori --
+              </option>
+              <option value={true}>Rekomendasi</option>
+              <option value={false}>Tidak diRekomendasikan</option>
+            </select>
+          </div>
+        </div>
+      </div>
       <div className={styles.editor}>
         <button className={styles.button} onClick={() => setOpen(!open)}>
           <FaPlus size={25} className={styles.FaButton} />
