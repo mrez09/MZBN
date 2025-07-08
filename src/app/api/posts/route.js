@@ -63,6 +63,10 @@ export const POST = async (req) => {
     const desc = formData.get("desc");
     const slug = formData.get("slug");
     const catSlug = formData.get("catSlug");
+    //    const isFeatured = formData.get("isFeatured");
+    const isFeaturedRaw = formData.get("isFeatured");
+    const isFeatured = isFeaturedRaw === "true";
+    const createdAt = formData.get("createdAt");
 
     let imageUrl = null;
 
@@ -84,6 +88,8 @@ export const POST = async (req) => {
         desc,
         slug,
         catSlug,
+        isFeatured,
+        createdAt,
         image: imageUrl,
         userEmail: session.user.email,
       },

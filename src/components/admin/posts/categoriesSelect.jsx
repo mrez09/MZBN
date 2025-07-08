@@ -25,9 +25,7 @@ export default function CategorySelect({ onChange }) {
         name="catSlug"
         onChange={onChange}
       >
-        <option value="" disabled>
-          -- Pilih Kategori --
-        </option>
+        <option value="default">-- Pilih Kategori --</option>
         {categories.map((cat) => (
           <option key={cat.id} value={cat.slug}>
             {cat.title}

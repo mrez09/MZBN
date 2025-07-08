@@ -27,7 +27,7 @@ const Writepage = () => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [catSlug, setCatSlug] = useState("");
-  const [isFeatured, setisFeatured] = useState("");
+  const [isFeatured, setisFeatured] = useState(false);
 
   if (status === "loading") {
     return <div className={styles.loading}>Loading...</div>;
@@ -42,12 +42,22 @@ const Writepage = () => {
       .replace(/^-+|-+$/g, "");
 
   const handleSubmit = async () => {
+    console.log({
+      title,
+      value, // ini adalah `desc`
+      slug: slugify(title),
+      catSlug,
+      file,
+      isFeatured,
+      startDate,
+    });
     const formData = new FormData();
     formData.append("title", title);
     formData.append("desc", value);
     formData.append("slug", slugify(title));
     formData.append("catSlug", catSlug);
     formData.append("isFeatured", isFeatured);
+    formData.append("createdAt", startDate.toISOString());
     if (file) formData.append("file", file);
 
     try {
@@ -72,7 +82,7 @@ const Writepage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.form_title}>
-        <label htmlFor="date" className={styles.label}>
+        <label htmlFor="title" className={styles.label}>
           Title
         </label>
         <input
@@ -84,8 +94,31 @@ const Writepage = () => {
       </div>
       <div className={styles.form_group}>
         <div className={styles.row}>
+          {/* IS FEATURED DIPINDAH KE PALING KIRI */}
+          <div className={styles.group}>
+            <label htmlFor="isFeatured" className={styles.label}>
+              Is Featured
+            </label>
+            <select
+              className={styles.select}
+              id="isFeatured"
+              name="isFeatured"
+              value={isFeatured}
+              onChange={(e) => setisFeatured(e.target.value === "true")}
+            >
+              <option value="" disabled>
+                -- Pilih Status --
+              </option>
+              <option value="true">Rekomendasi</option>
+              <option value="false">Tidak direkomendasikan</option>
+            </select>
+          </div>
+
+          {/* KATEGORI */}
+
           <CategorySelect onChange={(e) => setCatSlug(e.target.value)} />
-          {/* Date Input */}
+
+          {/* TANGGAL */}
           <div className={styles.group}>
             <label htmlFor="date" className={styles.label}>
               Select Date
@@ -96,23 +129,6 @@ const Writepage = () => {
               dateFormat="yyyy-MM-dd"
               className={styles.input}
             />
-          </div>
-          <div className={styles.group}>
-            <label htmlFor="date" className={styles.label}>
-              Is Featured
-            </label>
-            <select
-              className={styles.select}
-              id="isFeatured"
-              name="isFeatured"
-              onChange={(e) => setisFeatured(e.target.isFeatured)}
-            >
-              <option value="" disabled>
-                -- Pilih Kategori --
-              </option>
-              <option value={true}>Rekomendasi</option>
-              <option value={false}>Tidak diRekomendasikan</option>
-            </select>
           </div>
         </div>
       </div>
