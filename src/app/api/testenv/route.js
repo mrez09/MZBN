@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // app/api/testenv/route.js
 export async function GET() {
   return Response.json({
