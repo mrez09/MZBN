@@ -153,3 +153,36 @@
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
+/** Upload Loading */
+.preview_wrapper {
+  margin-top: 10px;
+  max-width: 300px;
+}
+
+.preview_image {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.loading_spinner {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.progress_bar {
+  width: 100%;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 5px;
+  height: 10px;
+}
+
+.progress {
+  height: 10px;
+  background: #0070f3;
+  transition: width 0.3s ease;
+}

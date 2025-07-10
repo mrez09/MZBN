@@ -29,6 +29,12 @@ const Writepage = () => {
   const [catSlug, setCatSlug] = useState("");
   const [isFeatured, setisFeatured] = useState(false);
 
+  //upload animation
+  const [preview, setPreview] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [imageUrl, setImageUrl] = useState(""); // result from imagekit
+
   if (status === "loading") {
     return <div className={styles.loading}>Loading...</div>;
   }
@@ -41,7 +47,47 @@ const Writepage = () => {
       .replace(/[\s_-]+/g, "-")
       .replace(/^-+|-+$/g, "");
 
+  //Preview Image Handle
+  const handleFileChange = async (e) => {
+    const selectedFile = e.target.files[0];
+    if (!selectedFile) return;
+
+    setUploading(true);
+
+    // Prepare form data
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    try {
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setImageUrl(data.url); // simpan URL untuk preview dan submit
+        setPreview(data.url); // tampilkan preview
+      } else {
+        console.error("Upload failed:", data.message);
+      }
+    } catch (err) {
+      console.error("Error uploading image:", err);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  //submit handle
   const handleSubmit = async () => {
+    if (!imageUrl) {
+      alert("Tunggu gambar selesai diupload!");
+      return;
+    }
+
+    setUploading(true);
+    setUploadProgress(0);
     console.log({
       title,
       value, // ini adalah `desc`
@@ -58,25 +104,37 @@ const Writepage = () => {
     formData.append("catSlug", catSlug);
     formData.append("isFeatured", isFeatured);
     formData.append("createdAt", startDate.toISOString());
-    if (file) formData.append("file", file);
+    formData.append("image", imageUrl);
 
-    try {
-      const res = await fetch("/api/posts", {
-        method: "POST",
-        body: formData,
-      });
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/posts");
 
-      const data = await res.json();
-      console.log("🧪 Post response:", data);
+    xhr.upload.addEventListener("progress", (event) => {
+      if (event.lengthComputable) {
+        const percent = Math.round((event.loaded / event.total) * 100);
+        setUploadProgress(percent);
+      }
+    });
 
-      if (res.ok) {
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const data = JSON.parse(xhr.responseText);
         router.push(`/posts/${data.slug}`);
       } else {
-        console.error("🚨 Error creating post:", data.message);
+        console.error("Upload failed:", xhr.responseText);
       }
-    } catch (err) {
-      console.error("Submit failed:", err);
-    }
+      setUploading(false);
+    };
+
+    xhr.onerror = () => {
+      console.error("Upload failed");
+      setUploading(false);
+    };
+
+    xhr.send(formData);
+
+    //const data = await res.json();
+    //console.log("🧪 Post response:", data);
   };
 
   return (
@@ -132,6 +190,34 @@ const Writepage = () => {
           </div>
         </div>
       </div>
+
+      <div className={styles.form_group}>
+        <div className={styles.row}>
+          {/* Preview gambar */}
+          {preview && (
+            <div className={styles.preview_wrapper}>
+              <img
+                src={preview}
+                alt="Preview"
+                className={styles.preview_image}
+              />
+            </div>
+          )}
+
+          {/* Animasi Loading + Progress Bar */}
+          {uploading && (
+            <div className={styles.loading_spinner}>
+              <p>Uploading... {uploadProgress}%</p>
+              <div className={styles.progress_bar}>
+                <div
+                  className={styles.progress}
+                  style={{ width: `${uploadProgress}%` }}
+                ></div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
       <div className={styles.editor}>
         <button className={styles.button} onClick={() => setOpen(!open)}>
           <FaPlus size={25} className={styles.FaButton} />
@@ -141,7 +227,7 @@ const Writepage = () => {
             <input
               type="file"
               id="image"
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={handleFileChange}
               style={{ display: "none" }}
             />
             <label htmlFor="image" className={styles.addButton}>

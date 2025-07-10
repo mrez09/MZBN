@@ -58,7 +58,7 @@ export const POST = async (req) => {
   try {
     const formData = await req.formData();
 
-    const file = formData.get("file");
+    //const file = formData.get("file");
     const title = formData.get("title");
     const desc = formData.get("desc");
     const slug = formData.get("slug");
@@ -68,18 +68,18 @@ export const POST = async (req) => {
     const isFeatured = isFeaturedRaw === "true";
     const createdAt = formData.get("createdAt");
 
-    let imageUrl = null;
+    const imageUrl = formData.get("imageUrl");
 
-    if (file) {
-      const buffer = Buffer.from(await file.arrayBuffer());
+    //if (file) {
+    //const buffer = Buffer.from(await file.arrayBuffer());
 
-      const uploadResult = await imagekit.upload({
-        file: buffer,
-        fileName: file.name,
-      });
+    //const uploadResult = await imagekit.upload({
+    // file: buffer,
+    // fileName: file.name,
+    //});
 
-      imageUrl = uploadResult.url;
-    }
+    //imageUrl = uploadResult.url;
+    //}
 
     // ✅ Ini penting! Simpan semua ke Prisma
     const post = await prisma.post.create({
