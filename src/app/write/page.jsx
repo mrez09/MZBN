@@ -104,7 +104,7 @@ const Writepage = () => {
     formData.append("catSlug", catSlug);
     formData.append("isFeatured", isFeatured);
     formData.append("createdAt", startDate.toISOString());
-    formData.append("image", imageUrl);
+    formData.append("imageUrl", imageUrl);
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/posts");
