@@ -186,3 +186,7 @@
   background: #0070f3;
   transition: width 0.3s ease;
 }
+
+.SubmitProgress {
+  margin-top: 50px;
+}

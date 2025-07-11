@@ -99,7 +99,7 @@ export const POST = async (req) => {
   } catch (err) {
     console.error("POST ERROR:", err);
     return new NextResponse(
-      JSON.stringify({ message: "Something went wrong!" }),
+      JSON.stringify({ message: "Something went wrong! Internet Lost" }),
       { status: 500 }
     );
   }
