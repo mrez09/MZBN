@@ -142,6 +142,10 @@
   transition: border 0.3s, box-shadow 0.3s;
   outline: none;
 }
+.select_max {
+  max-height: 100px;
+  overflow-y: auto;
+}
 
 .select:hover,
 .input:hover {

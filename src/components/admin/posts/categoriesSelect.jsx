@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import styles from "./categoriesSelect.module.css";
+import Select from "react-select";
 
 export default function CategorySelect({ value, onChange }) {
   const [categories, setCategories] = useState([]);
@@ -18,12 +19,32 @@ export default function CategorySelect({ value, onChange }) {
     fetchCategories();
   }, []);
 
+  const options = categories.map((cat) => ({
+    value: cat.slug,
+    label: cat.title,
+  }));
+
   return (
     <div className={styles.group}>
       <label htmlFor="option" className={styles.label}>
         Kategori
       </label>
-      <select
+
+      <Select
+        options={options}
+        value={options.find((opt) => opt.value === value)}
+        onChange={(selected) => onChange({ target: { value: selected.value } })}
+        styles={{
+          menu: (provided) => ({
+            ...provided,
+            maxHeight: "150px",
+            overflowY: "auto",
+          }),
+        }}
+      />
+
+      {/*
+        <select
         className={styles.select}
         id="catSlug"
         name="catSlug"
@@ -39,6 +60,7 @@ export default function CategorySelect({ value, onChange }) {
           </option>
         ))}
       </select>
+      */}
     </div>
   );
 }

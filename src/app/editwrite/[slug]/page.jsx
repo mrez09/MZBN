@@ -25,6 +25,21 @@ const EditWrite = () => {
   const [startDate, setStartDate] = useState(new Date());
 
   const [loading, setLoading] = useState(false);
+  //upload animation
+  const [preview, setPreview] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [submitProgress, setSubmitProgress] = useState(0);
+  const [imageUrl, setImageUrl] = useState(""); // result from imagekit
+
+  const slugify = (str) =>
+    str
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -50,30 +65,45 @@ const EditWrite = () => {
 
   const handleUpdate = async () => {
     setLoading(true);
-    try {
-      const res = await fetch(`/api/posts/${slug}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title,
-          desc,
-          catSlug,
-          isFeatured,
-          createdAt: startDate,
-        }),
-      });
+    setSubmitting(true);
+    setSubmitProgress(0);
 
-      if (res.ok) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", `/api/posts/${slug}`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.upload.addEventListener("progress", (event) => {
+      if (event.lengthComputable) {
+        const percent = Math.round((event.loaded / event.total) * 100);
+        setSubmitProgress(percent); // ✅ tampilkan progress
+      }
+    });
+
+    xhr.onload = () => {
+      setLoading(false);
+      setSubmitting(false);
+      if (xhr.status === 200) {
         toast.success("Post updated successfully!");
         router.push(`/posts/${slug}`);
       } else {
         toast.error("Failed to update post");
       }
-    } catch (err) {
-      toast.error("Something went wrong");
-    } finally {
+    };
+
+    xhr.onerror = () => {
       setLoading(false);
-    }
+      setSubmitting(false);
+      toast.error("Something went wrong");
+    };
+
+    const jsonBody = JSON.stringify({
+      title,
+      desc,
+      catSlug,
+      isFeatured,
+      createdAt: startDate,
+    });
+
+    xhr.send(jsonBody);
   };
 
   return (
@@ -119,6 +149,7 @@ const EditWrite = () => {
           <CategorySelect
             key={catSlug}
             value={catSlug}
+            className={styles.select_max}
             onChange={(e) => setCatSlug(e.target.value)}
           />
 
@@ -164,8 +195,8 @@ const EditWrite = () => {
         />
       </div>
 
-      <button className={styles.publish} onChange={handleUpdate}>
-        Publish
+      <button className={styles.publish} onClick={handleUpdate}>
+        Update
       </button>
     </div>
   );
