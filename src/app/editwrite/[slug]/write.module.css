@@ -1,0 +1,192 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.select {
+  margin-bottom: 50px;
+  padding: 10px 20px;
+  width: max-content;
+}
+
+.editor {
+  display: flex;
+  gap: 20px;
+  height: 700px;
+  position: relative;
+}
+
+.button,
+.addButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid var(--textColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.addButton {
+  border-color: #1a8917;
+}
+
+.add {
+  display: flex;
+  gap: 20px;
+  background-color: var(--bg);
+  position: absolute;
+  z-index: 999;
+  width: max-content;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  left: 50px;
+}
+
+.FaButton {
+  color: white;
+}
+.FaButton:hover {
+  color: gray;
+}
+.input {
+  padding: 50px;
+  font-size: 64px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.input::placeholder {
+  color: #b3b3b1;
+}
+
+.textArea {
+  width: 100%;
+}
+
+.publish {
+  position: absolute;
+  top: 20px;
+  right: 0px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #1a8917;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+/** Form Select and date**/
+.form_group {
+  margin-bottom: 1rem;
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.form_title {
+  margin-top: 100px;
+}
+
+.title {
+  padding: 0.75rem 1rem;
+  font-size: 18px;
+  font-weight: 600;
+  width: 100%;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  background-color: #f9fafb;
+  color: #111;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.title:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  outline: none;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 20px;
+  gap: 2px;
+}
+
+.select,
+.input {
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  transition: border 0.3s, box-shadow 0.3s;
+  outline: none;
+}
+
+.select:hover,
+.input:hover {
+  border-color: #9ca3af;
+}
+
+.select:focus,
+.input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+/** Upload Loading */
+.preview_wrapper {
+  margin-top: 10px;
+  max-width: 300px;
+}
+
+.preview_image {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.loading_spinner {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.progress_bar {
+  width: 100%;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 5px;
+  height: 10px;
+}
+
+.progress {
+  height: 10px;
+  background: #0070f3;
+  transition: width 0.3s ease;
+}
+
+.SubmitProgress {
+  margin-top: 50px;
+}

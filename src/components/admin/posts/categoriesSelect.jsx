@@ -1,15 +1,19 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./categoriesSelect.module.css";
 
-export default function CategorySelect({ onChange }) {
+export default function CategorySelect({ value, onChange }) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const res = await fetch("/api/categories");
-      const data = await res.json();
-      setCategories(data);
+      try {
+        const res = await fetch("/api/admin/categories");
+        const data = await res.json();
+        setCategories(data);
+      } catch (error) {
+        console.error("Gagal ambil kategori:", error);
+      }
     };
     fetchCategories();
   }, []);
@@ -21,13 +25,16 @@ export default function CategorySelect({ onChange }) {
       </label>
       <select
         className={styles.select}
-        id="category"
+        id="catSlug"
         name="catSlug"
+        value={value || ""}
         onChange={onChange}
       >
-        <option value="default">-- Pilih Kategori --</option>
+        <option value="" disabled>
+          -- Pilih Kategori --
+        </option>
         {categories.map((cat) => (
-          <option key={cat.id} value={cat.slug}>
+          <option key={cat.slug} value={cat.slug}>
             {cat.title}
           </option>
         ))}
