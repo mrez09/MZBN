@@ -31,7 +31,11 @@ const EditWrite = () => {
   const [submitting, setSubmitting] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [submitProgress, setSubmitProgress] = useState(0);
+
+  //image update
   const [imageUrl, setImageUrl] = useState(""); // result from imagekit
+  const [imageFileId, setImageFileId] = useState("");
+  const [oldImageFileId, setOldImageFileId] = useState("");
 
   const slugify = (str) =>
     str
@@ -53,6 +57,8 @@ const EditWrite = () => {
         setCatSlug(data.catSlug || ""); // ini yang dikirim ke CategorySelect
         setIsFeatured(data.isFeatured);
         setStartDate(new Date(data.createdAt));
+        setImageUrl(data.image || "");
+        setOldImageFileId(data.imageFileId || "");
         console.log("Set kategori:", data.catSlug); // tambahkan setelah fetch
         console.log("Current state:", catSlug);
       } catch (err) {
@@ -62,6 +68,48 @@ const EditWrite = () => {
     console.log("✅ catSlug ter-update:", catSlug);
     if (slug) fetchPost();
   }, [slug]);
+
+  //Preview Image Handle
+  const handleFileChange = async (e) => {
+    const selectedFile = e.target.files[0];
+    if (!selectedFile) return;
+
+    setUploading(true);
+    setUploadProgress(0);
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/upload");
+
+    xhr.upload.addEventListener("progress", (event) => {
+      if (event.lengthComputable) {
+        const percent = Math.round((event.loaded / event.total) * 100);
+        setUploadProgress(percent);
+      }
+    });
+
+    xhr.onload = () => {
+      setUploading(false);
+      if (xhr.status === 200) {
+        const res = JSON.parse(xhr.responseText);
+        setImageUrl(res.url);
+        setImageFileId(res.fileId); // ✅ simpan ID baru
+        setPreview(res.url);
+        toast.success("Berhasil diUpload!");
+      } else {
+        toast.error("Upload gagal!");
+      }
+    };
+
+    xhr.onerror = () => {
+      setUploading(false);
+      toast.error("Terjadi kesalahan saat mengupload!");
+    };
+
+    xhr.send(formData);
+  };
 
   const handleUpdate = async () => {
     setLoading(true);
@@ -101,6 +149,8 @@ const EditWrite = () => {
       catSlug,
       isFeatured,
       createdAt: startDate,
+      image: imageUrl,
+      imageFileId,
     });
 
     xhr.send(jsonBody);
@@ -109,6 +159,19 @@ const EditWrite = () => {
   return (
     <div className={styles.container}>
       <ToastContainer position="top-right" autoClose={3000} />
+      {submitting && (
+        <div className={styles.SubmitProgress}>
+          <div className={styles.loading_spinner}>
+            <p>Publish... {submitProgress}%</p>
+            <div className={styles.progress_bar}>
+              <div
+                className={styles.progress}
+                style={{ width: `${submitProgress}%` }}
+              ></div>
+            </div>
+          </div>
+        </div>
+      )}
       <h1>Edit Post</h1>
 
       <div className={styles.form_title}>
@@ -168,13 +231,47 @@ const EditWrite = () => {
         </div>
       </div>
 
+      {/**Preview Gambar */}
+      <div className={styles.form_group}>
+        <div className={styles.row}>
+          {/* Preview gambar */}
+          {preview && (
+            <div className={styles.preview_wrapper}>
+              <img
+                src={preview}
+                alt="Preview"
+                className={styles.preview_image}
+              />
+            </div>
+          )}
+
+          {/* Animasi Loading + Progress Bar */}
+          {uploading && (
+            <div className={styles.loading_spinner}>
+              <p>Uploading... {uploadProgress}%</p>
+              <div className={styles.progress_bar}>
+                <div
+                  className={styles.progress}
+                  style={{ width: `${uploadProgress}%` }}
+                ></div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
       <div className={styles.editor}>
         <button className={styles.button} onClick={() => setOpen(!open)}>
           <FaPlus size={25} className={styles.FaButton} />
         </button>
         {open && (
           <div className={styles.add}>
-            <input type="file" id="image" style={{ display: "none" }} />
+            <input
+              type="file"
+              id="image"
+              style={{ display: "none" }}
+              onChange={handleFileChange}
+            />
             <label htmlFor="image" className={styles.addButton}>
               <FaImage size={20} className={styles.FaButton} />
             </label>

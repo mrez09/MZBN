@@ -25,3 +25,46 @@ export const POST = async (req) => {
     return NextResponse.json({ message: "Upload failed" }, { status: 500 });
   }
 };
+
+// PUT: Update post dari aichan
+export const PUT = async (req, { params }) => {
+  const session = await getAuthSession();
+  if (!session) {
+    return new NextResponse("Not authenticated", { status: 401 });
+  }
+
+  const data = await req.formData();
+
+  const image = data.get("image");
+  const imageFileId = data.get("imageFileId");
+  const oldImageFileId = data.get("oldImageFileId");
+
+  // ✅ Hapus gambar lama jika berbeda
+  if (oldImageFileId && imageFileId && oldImageFileId !== imageFileId) {
+    try {
+      await imagekit.deleteFile(oldImageFileId);
+    } catch (err) {
+      console.error("Gagal hapus gambar lama:", err.message);
+    }
+  }
+
+  try {
+    const updatedPost = await prisma.post.update({
+      where: { slug: params.slug },
+      data: {
+        title: data.get("title"),
+        desc: data.get("desc"),
+        catSlug: data.get("catSlug"),
+        isFeatured: data.get("isFeatured") === "true",
+        createdAt: new Date(data.get("createdAt")),
+        image,
+        imageFileId,
+      },
+    });
+
+    return new NextResponse(JSON.stringify(updatedPost), { status: 200 });
+  } catch (err) {
+    console.error("Update error:", err);
+    return new NextResponse("Update failed", { status: 500 });
+  }
+};

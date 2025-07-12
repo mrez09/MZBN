@@ -117,6 +117,7 @@ model Post {
   title     String
   desc      String
   image     String?
+  imageFileId   String?  // ✅ untuk hapus gambar di ImageKit
   views     Int @default(0)
   catSlug   String
   isFeatured Boolean @default(false)

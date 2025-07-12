@@ -31,6 +31,8 @@ export const PUT = async (req, { params }) => {
 
   try {
     const body = await req.json();
+    const image = body.image || null;
+    const imageFileId = body.imageFileId || null;
     const updatedPost = await prisma.post.update({
       where: { slug: params.slug },
       data: {
@@ -39,6 +41,8 @@ export const PUT = async (req, { params }) => {
         catSlug: body.catSlug,
         isFeatured: body.isFeatured,
         createdAt: new Date(body.createdAt),
+        image: image,
+        imageFileId: imageFileId,
       },
     });
 
