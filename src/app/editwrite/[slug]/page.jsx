@@ -11,7 +11,11 @@ import { FaFile, FaImage, FaPlus, FaVideo, FaYoutube } from "react-icons/fa6";
 import CategorySelect from "@/components/admin/posts/categoriesSelect";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import "quill/dist/quill.core.css"; // penting untuk ikon default
 import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
+import Quill from "quill";
+import RichEditorWithBubble from "@/components/admin/posts/RichEditorWithBubble";
 
 const EditWrite = () => {
   const { slug } = useParams();
@@ -156,6 +160,24 @@ const EditWrite = () => {
     xhr.send(jsonBody);
   };
 
+  //react quil
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, false] }],
+      [{ font: [] }],
+      [{ size: [] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ color: [] }, { background: [] }],
+      [{ script: "sub" }, { script: "super" }],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ indent: "-1" }, { indent: "+1" }],
+      [{ align: [] }],
+      ["blockquote", "code-block"],
+      ["link", "image", "video"],
+      ["clean"],
+    ],
+  };
+
   return (
     <div className={styles.container}>
       <ToastContainer position="top-right" autoClose={3000} />
@@ -283,13 +305,7 @@ const EditWrite = () => {
             </button>
           </div>
         )}
-        <ReactQuill
-          className={styles.textArea}
-          theme="snow"
-          value={desc}
-          onChange={setDesc}
-          placeholder="Write Something..."
-        />
+        <RichEditorWithBubble value={desc} onChange={setDesc} />
       </div>
 
       <button className={styles.publish} onClick={handleUpdate}>
