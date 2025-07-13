@@ -1,0 +1,124 @@
+.container {
+  margin-top: 100px;
+}
+
+.tablelist {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.tablelist th,
+.tablelist td {
+  border: none;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 15px;
+  color: black;
+}
+
+.tablelist thead {
+  background-color: #317ab6;
+  color: white;
+}
+
+.tablelist tbody tr:nth-child(even) {
+  background-color: #f4f8fc;
+}
+
+.tablelist tbody tr:nth-child(odd) {
+  background-color: #eaf3fb;
+}
+
+.tablelist tbody tr:hover {
+  background-color: #dbeeff;
+}
+
+/*style custom*/
+
+/* listPosts.module.css */
+.striped:nth-child(even) {
+  background-color: #d9eafd;
+}
+.striped:nth-child(odd) {
+  background-color: #bcccdc;
+}
+
+/*Button Unique*/
+.btn_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+.btn_pulse {
+  background-color: #06923e;
+  color: white;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin-right: "8px";
+}
+
+.btn_pulse:hover {
+  animation: pulse 1.5s infinite;
+  background-color: #4682a9;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(155, 89, 182, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 15px rgba(155, 89, 182, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(155, 89, 182, 0);
+  }
+}
+
+.btn_shake {
+  background-color: #ffb142;
+  color: white;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn_shake:hover {
+  animation: shake 0.5s infinite;
+  background-color: #ff5252;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+  50% {
+    transform: translateX(5px) rotate(5deg);
+  }
+  75% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

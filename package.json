@@ -12,6 +12,7 @@
     "@auth/prisma-adapter": "^2.10.0",
     "@emailjs/browser": "^4.4.1",
     "@prisma/client": "^6.10.1",
+    "@tanstack/react-table": "^8.21.3",
     "date-fns": "^4.1.0",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
