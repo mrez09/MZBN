@@ -36,6 +36,9 @@ const ListPost = () => {
     columnHelper.accessor("catSlug", {
       header: "Kategori",
     }),
+    columnHelper.accessor("status", {
+      header: "Status",
+    }),
     columnHelper.accessor("createdAt", {
       header: "Tanggal",
       cell: (info) =>
@@ -45,10 +48,10 @@ const ListPost = () => {
           year: "numeric",
         }),
     }),
-    columnHelper.accessor("user.name", {
-      header: "Author",
-      cell: (info) => info.getValue() || "-",
-    }),
+    //columnHelper.accessor("user.name", {
+    //header: "Author",
+    //cell: (info) => info.getValue() || "-",
+    //}),
     columnHelper.display({
       id: "actions",
       header: "Aksi",

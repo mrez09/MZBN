@@ -26,6 +26,7 @@ const EditWrite = () => {
   const [desc, setDesc] = useState("");
   const [catSlug, setCatSlug] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
+  const [status, setPostStatus] = useState("DRAFT");
   const [startDate, setStartDate] = useState(new Date());
 
   const [loading, setLoading] = useState(false);
@@ -60,6 +61,7 @@ const EditWrite = () => {
         setDesc(data.desc);
         setCatSlug(data.catSlug || ""); // ini yang dikirim ke CategorySelect
         setIsFeatured(data.isFeatured);
+        setPostStatus(data.status);
         setStartDate(new Date(data.createdAt));
         setImageUrl(data.image || "");
         setOldImageFileId(data.imageFileId || "");
@@ -152,6 +154,7 @@ const EditWrite = () => {
       desc,
       catSlug,
       isFeatured,
+      status: status,
       createdAt: startDate,
       image: imageUrl,
       imageFileId,
@@ -249,6 +252,24 @@ const EditWrite = () => {
               dateFormat="yyyy-MM-dd"
               className={styles.input}
             />
+          </div>
+
+          {/**Status */}
+          <div className={styles.group}>
+            <label htmlFor="status" className={styles.label}>
+              Status
+            </label>
+            <select
+              className={styles.select}
+              id="status"
+              name="status"
+              value={status}
+              onChange={(e) => setPostStatus(e.target.value)}
+            >
+              <option value="DRAFT">Draft</option>
+              <option value="PUBLISHED">Published</option>
+              <option value="ARCHIVED">Archived</option>
+            </select>
           </div>
         </div>
       </div>

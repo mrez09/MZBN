@@ -117,6 +117,13 @@ model Post {
 
 }*/
 /* Relasi */
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
 model Post {
   id        String @id @default(cuid()) @map("_id")
   createdAt DateTime @default(now())
@@ -125,6 +132,7 @@ model Post {
   desc      String
   image     String?
   imageFileId   String?  // ✅ untuk hapus gambar di ImageKit
+  status    PostStatus @default(DRAFT)
   views     Int @default(0)
   catSlug   String
   isFeatured Boolean @default(false)

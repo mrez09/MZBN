@@ -21,6 +21,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Writepage = () => {
   const { status } = useSession();
+  const [postStatus, setPostStatus] = useState("DRAFT");
   const [startDate, setStartDate] = useState(new Date());
 
   const router = useRouter();
@@ -120,6 +121,7 @@ const Writepage = () => {
     formData.append("isFeatured", isFeatured);
     formData.append("createdAt", startDate.toISOString());
     formData.append("imageUrl", imageUrl);
+    formData.append("status", postStatus);
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/posts");
@@ -222,6 +224,24 @@ const Writepage = () => {
               dateFormat="yyyy-MM-dd"
               className={styles.input}
             />
+          </div>
+
+          {/** */}
+          <div className={styles.group}>
+            <label htmlFor="Status" className={styles.label}>
+              Status
+            </label>
+            <select
+              className={styles.select}
+              id="status"
+              name="status"
+              value={postStatus}
+              onChange={(e) => setPostStatus(e.target.value)}
+            >
+              <option value="DRAFT">Draft</option>
+              <option value="PUBLISHED">Published</option>
+              <option value="ARCHIVED">Archived</option>
+            </select>
           </div>
         </div>
       </div>

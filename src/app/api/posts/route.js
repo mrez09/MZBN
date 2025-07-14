@@ -67,6 +67,7 @@ export const POST = async (req) => {
     const isFeaturedRaw = formData.get("isFeatured");
     const isFeatured = isFeaturedRaw === "true";
     const createdAt = formData.get("createdAt");
+    const status = formData.get("status");
 
     const imageUrl = formData.get("imageUrl");
 
@@ -90,6 +91,7 @@ export const POST = async (req) => {
         catSlug,
         isFeatured,
         createdAt,
+        status,
         image: imageUrl,
         userEmail: session.user.email,
       },
