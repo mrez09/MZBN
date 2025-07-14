@@ -23,6 +23,7 @@ export const GET = async () => {
           gte: lastMonth,
           lt: today,
         },
+        status: "PUBLISHED",
       },
       take: 5, // Ambil 5 teratas saja
       include: {

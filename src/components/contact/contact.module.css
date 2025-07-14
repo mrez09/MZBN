@@ -2,6 +2,28 @@
   margin-top: 100px;
 }
 
+/* Contact.module.css */
+.wrapper {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap; /* ⬅️ Penting agar child bisa turun ke bawah */
+}
+
+.info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.formContainer {
+  flex: 1;
+  min-width: 300px;
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+
+/*CONTACTO*/
+
 .contactInfo {
   justify-content: center;
   text-align: center;
@@ -10,6 +32,7 @@
 
 .wrapper {
   display: flex;
+  flex: 1;
   justify-content: space-between;
   padding: 4rem;
   font-family: sans-serif;
@@ -203,4 +226,19 @@
   color: white;
   box-shadow: 2px 2px 0px black;
   border: 3px double white;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .info,
+  .formContainer {
+    width: 100%;
+  }
+
+  .formContainer {
+    padding: 1rem;
+  }
 }

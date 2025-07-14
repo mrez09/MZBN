@@ -38,6 +38,15 @@ const ListPost = () => {
     }),
     columnHelper.accessor("status", {
       header: "Status",
+      cell: (info) => {
+        const status = info.getValue();
+
+        return (
+          <span className={`${styles.badge} ${styles[status.toLowerCase()]}`}>
+            {status}
+          </span>
+        );
+      },
     }),
     columnHelper.accessor("createdAt", {
       header: "Tanggal",

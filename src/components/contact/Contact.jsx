@@ -75,23 +75,9 @@ const Contact = () => {
             <div>
               <h4>Our Address</h4>
               <p>
-                P.Sherman, 42 Wallaby Way, Sydney.
+                Jalanin aja dulu, Nyaman Kemudian.
                 <br />
               </p>
-            </div>
-          </div>
-
-          <div className={styles.detail}>
-            <span
-              className={`${styles.contactIcons} ${
-                theme === "dark" ? styles.dark : styles.light
-              }`}
-            >
-              <FaPhone className={styles.FaContact} />
-            </span>
-            <div>
-              <h4>Contact</h4>
-              <p>+62 1 23 45 67 89 Mineral-Town, 9h-18h</p>
             </div>
           </div>
 

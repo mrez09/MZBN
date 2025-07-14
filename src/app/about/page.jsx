@@ -12,25 +12,17 @@ const PageAbout = () => {
             <span className={styles.bold}>MZ</span> Learning
           </h1>
           <p className={styles.description}>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure,
-            adipisci. Pariatur, eveniet veniam! Ducimus, aliquam tempore quasi
-            assumenda magnam quo distinctio praesentium quod, voluptatum, esse
-            obcaecati adipisci cumque explicabo. Hic.
+            Kami adalah platform berbagi informasi, inspirasi, dan edukasi
+            seputar dunia teknologi, desain, dan gaya hidup digital.
           </p>
-
-          <p className={styles.servicesTitle}>
-            Service yang kami berikan antara lain:
+          <p className={styles.description}>
+            Misi kami adalah menyajikan konten berkualitas dan bermanfaat bagi
+            semua kalangan, mulai dari pemula hingga profesional.
           </p>
-          <ul className={styles.serviceList}>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-          </ul>
+          <p className={styles.description}>
+            Temukan artikel-artikel menarik, tutorial praktis, serta tips
+            terkini yang siap memperkaya wawasanmu setiap hari.
+          </p>
         </div>
 
         {/* Image Section */}

@@ -31,10 +31,11 @@ const Footer = () => {
           />
         </div>
         <p className={styles.desc}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti
-          facere fuga deserunt ad voluptates totam, modi sint at ipsum facilis
-          culpa incidunt nihil cum velit tempora iste veniam distinctio quae?
+          Kami adalah platform berbagi informasi, inspirasi, dan edukasi seputar
+          dunia teknologi, desain, dan gaya hidup digital. <br />
+          Motto Kami : "Coding joyfully, learning daily."
         </p>
+
         <div className={styles.icons}>
           <span
             className={`${styles.socialIcons} ${
@@ -77,9 +78,9 @@ const Footer = () => {
         <div className={styles.list}>
           <span className={styles.listTitle}>Navigation</span>
           <Link href="/">HomePage</Link>
-          <Link href="/">Blog</Link>
-          <Link href="/">About</Link>
-          <Link href="/">Contact</Link>
+          <Link href="https://mrizkies.web.id">Portofolio</Link>
+          <Link href="/about">About</Link>
+          <Link href="/contact">Contact</Link>
         </div>
         <div className={styles.list}>
           <span className={styles.listTitle}>Support</span>
@@ -90,14 +91,18 @@ const Footer = () => {
         </div>
         <div className={styles.list}>
           <span className={styles.listTitle}>Contact</span>
+
           <div className={styles.address}>
             <RiMapPinFill className={styles.FaIcon} />
-            <span>P.Sherman, 42 Wallaby Way, Sydney.</span>
+            <span>Jalanin Aja Dulu, Nyaman Kemudian, mwuhehe.</span>
           </div>
+          {/** 
+           *
           <div className={styles.address}>
             <FaPhone className={styles.FaIcon} />
             <span>+62 1 23 45 67 89 Mineral-Town, 9h-18h</span>
           </div>
+            */}
           <div className={styles.address}>
             <FaEnvelope className={styles.FaIcon} />
             <span>

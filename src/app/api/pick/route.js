@@ -23,6 +23,7 @@ export const GET = async () => {
           lt: today,
         },
         isFeatured: true,
+        status: "PUBLISHED",
       },
 
       take: 3, // Ambil 5 teratas saja

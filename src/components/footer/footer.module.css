@@ -31,6 +31,8 @@
 
 .desc {
   font-weight: 300;
+  width: 90%;
+  text-align: justify;
 }
 
 .icons {
