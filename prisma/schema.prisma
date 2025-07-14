@@ -132,7 +132,7 @@ model Post {
   desc      String
   image     String?
   imageFileId   String?  // ✅ untuk hapus gambar di ImageKit
-  status    PostStatus @default(DRAFT)
+  postStatus    PostStatus @default(DRAFT)
   views     Int @default(0)
   catSlug   String
   isFeatured Boolean @default(false)

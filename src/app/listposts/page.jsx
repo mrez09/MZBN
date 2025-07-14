@@ -10,6 +10,9 @@ import {
 import { useRouter } from "next/navigation";
 
 import styles from "./listPosts.module.css";
+import { useSession } from "next-auth/react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const columnHelper = createColumnHelper();
 
@@ -120,6 +123,16 @@ const ListPost = () => {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
+
+  const { status, data: session } = useSession();
+
+  if (status === "loading")
+    return <p className={styles.container}>Loading...</p>;
+  if (!session || session.user.role !== "admin") {
+    toast.error("Silahkan login sebagai admin.");
+    router.push("/login");
+    return null;
+  }
 
   return (
     <div style={{ padding: "1rem" }} className={styles.container}>

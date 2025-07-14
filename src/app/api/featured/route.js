@@ -9,7 +9,7 @@ export const GET = async () => {
         {
           $match: {
             isFeatured: true,
-            status: "PUBLISHED", // ✅ Tambahkan ini
+            postStatus: "PUBLISHED", // ✅ Tambahkan ini
           },
         },
         {

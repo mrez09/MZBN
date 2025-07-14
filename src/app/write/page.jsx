@@ -20,11 +20,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Writepage = () => {
-  const { status } = useSession();
-  const [postStatus, setPostStatus] = useState("DRAFT");
-  const [startDate, setStartDate] = useState(new Date());
+  const { data: session, status } = useSession();
 
   const router = useRouter();
+
+  const [postStatus, setPostStatus] = useState("DRAFT");
+  const [startDate, setStartDate] = useState(new Date());
 
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState(null);
@@ -40,10 +41,6 @@ const Writepage = () => {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [submitProgress, setSubmitProgress] = useState(0);
   const [imageUrl, setImageUrl] = useState(""); // result from imagekit
-
-  if (status === "loading") {
-    return <div className={styles.loading}>Loading...</div>;
-  }
 
   const slugify = (str) =>
     str
@@ -157,6 +154,16 @@ const Writepage = () => {
     //const data = await res.json();
     //console.log("🧪 Post response:", data);
   };
+
+  if (status === "loading")
+    return <p className={styles.container}>Loading...</p>;
+  if (!session || session.user.role !== "admin") {
+    toast.error("Silakan login sebagai admin.");
+    router.push("/login");
+    return null;
+  }
+  console.log("Session:", session);
+  console.log("Role:", session?.user?.role);
 
   return (
     <div className={styles.container}>

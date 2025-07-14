@@ -1,14 +1,23 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./loginPage.module.css";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Loginpage = () => {
   const { data, status } = useSession();
 
   const router = useRouter();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("message") === "unauthorized") {
+      toast.error("Silakan login terlebih dahulu.");
+    }
+  }, []);
 
   //console.log(data, status);
   if (status === "loading") {
@@ -21,6 +30,7 @@ const Loginpage = () => {
 
   return (
     <div className={styles.container}>
+      <ToastContainer position="top-right" autoClose={3000} />
       <div className={styles.flipBox}>
         <div className={styles.flipInner}>
           {/* Depan */}

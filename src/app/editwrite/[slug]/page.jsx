@@ -16,6 +16,7 @@ import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
 import Quill from "quill";
 import RichEditorWithBubble from "@/components/admin/posts/RichEditorWithBubble";
+import { useSession } from "next-auth/react";
 
 const EditWrite = () => {
   const { slug } = useParams();
@@ -26,7 +27,7 @@ const EditWrite = () => {
   const [desc, setDesc] = useState("");
   const [catSlug, setCatSlug] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
-  const [status, setPostStatus] = useState("DRAFT");
+  const [postStatus, setPostStatus] = useState("DRAFT");
   const [startDate, setStartDate] = useState(new Date());
 
   const [loading, setLoading] = useState(false);
@@ -61,7 +62,7 @@ const EditWrite = () => {
         setDesc(data.desc);
         setCatSlug(data.catSlug || ""); // ini yang dikirim ke CategorySelect
         setIsFeatured(data.isFeatured);
-        setPostStatus(data.status);
+        setPostStatus(data.postStatus);
         setStartDate(new Date(data.createdAt));
         setImageUrl(data.image || "");
         setOldImageFileId(data.imageFileId || "");
@@ -154,7 +155,7 @@ const EditWrite = () => {
       desc,
       catSlug,
       isFeatured,
-      status: status,
+      postStatus: postStatus,
       createdAt: startDate,
       image: imageUrl,
       imageFileId,
@@ -180,6 +181,17 @@ const EditWrite = () => {
       ["clean"],
     ],
   };
+
+  //session
+  const { status, data: session } = useSession();
+
+  if (status === "loading")
+    return <p className={styles.container}>Loading...</p>;
+  if (!session || session.user.role !== "admin") {
+    toast.error("Silahkan login sebagai admin.");
+    router.push("/login");
+    return null;
+  }
 
   return (
     <div className={styles.container}>
@@ -256,14 +268,14 @@ const EditWrite = () => {
 
           {/**Status */}
           <div className={styles.group}>
-            <label htmlFor="status" className={styles.label}>
+            <label htmlFor="postStatus" className={styles.label}>
               Status
             </label>
             <select
               className={styles.select}
-              id="status"
-              name="status"
-              value={status}
+              id="postStatus"
+              name="postStatus"
+              value={postStatus}
               onChange={(e) => setPostStatus(e.target.value)}
             >
               <option value="DRAFT">Draft</option>

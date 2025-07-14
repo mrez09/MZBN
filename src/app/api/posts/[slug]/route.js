@@ -41,7 +41,7 @@ export const PUT = async (req, { params }) => {
         desc: body.desc,
         catSlug: body.catSlug,
         isFeatured: body.isFeatured,
-        status: body.status,
+        postStatus: body.postStatus,
         createdAt: new Date(body.createdAt),
         image: image,
         imageFileId: imageFileId,

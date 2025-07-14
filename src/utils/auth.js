@@ -9,6 +9,23 @@ export const authOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async jwt({ token, user }) {
+      // Pertama kali login
+      if (user) {
+        const dbUser = await prisma.user.findUnique({
+          where: { email: user.email },
+        });
+
+        token.role = dbUser?.role || "user"; // fallback default
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.role = token.role; // Ambil role dari token, bukan user
+      return session;
+    },
+  },
 };
 
 export const getAuthSession = () => getServerSession(authOptions);

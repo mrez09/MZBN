@@ -16,7 +16,7 @@ export const GET = async (req) => {
     take: POST_PER_PAGE,
     skip: POST_PER_PAGE * (page - 1),
     where: {
-      status: "PUBLISHED",
+      postStatus: "PUBLISHED",
       ...(cat && { catSlug: cat }),
     },
     orderBy: {
