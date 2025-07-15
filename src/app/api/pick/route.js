@@ -7,8 +7,8 @@ export const GET = async () => {
   const today = new Date();
   //oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1); //setelah 1 bulan
   const lastMonth = new Date(
-    today.getFullYear(),
-    today.getMonth() - 1,
+    today.getFullYear() - 12,
+    today.getMonth(),
     today.getDate()
   ); //sebelum 1 bulan
 

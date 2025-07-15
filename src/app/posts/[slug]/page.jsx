@@ -3,12 +3,15 @@ import styles from "./singlePage.module.css";
 import Image from "next/image";
 import Menu from "@/components/Menu/Menu";
 import Comments from "@/components/comments/Comments";
+import WaktuSekarang from "../../../components/time/waktuUpload";
+import { format, compareAsc } from "date-fns";
+import { id } from "date-fns/locale";
 
 const getData = async (slug) => {
   const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
     cache: "no-store",
   });
-
+  const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
   if (!res.ok) {
     throw new Error("Failed");
   }
@@ -24,7 +27,7 @@ const SinglePage = async ({ params }) => {
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.textContainer}>
-          <h1>{data?.title}</h1>
+          <h1 className={styles.titleH1}>{data?.title}</h1>
           <div className={styles.user}>
             {data?.user?.image && (
               <div className={styles.userImageContainer}>
@@ -37,12 +40,14 @@ const SinglePage = async ({ params }) => {
               </div>
             )}
             <div className={styles.userTextContainer}>
-              <span className={styles.username}>
-                {
-                  //data?.user.name
-                }
+              <span className={styles.username}>{data?.user.name}</span>
+              <span className={styles.date}>
+                {data?.createdAt
+                  ? format(new Date(data.createdAt), "EEEE, dd MMMM yyyy", {
+                      locale: id,
+                    })
+                  : "Tanggal tidak tersedia"}
               </span>
-              <span className={styles.date}>{data?.createdAt}</span>
             </div>
           </div>
         </div>
@@ -54,7 +59,7 @@ const SinglePage = async ({ params }) => {
       </div>
       <div className={styles.content}>
         <div className={styles.post}>
-          <div className={styles.description}>
+          <div className={styles.deschead}>
             <div
               className={styles.description}
               dangerouslySetInnerHTML={{ __html: data?.desc }}

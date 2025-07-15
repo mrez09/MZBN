@@ -3,12 +3,15 @@
 }
 .infoContainer {
   display: flex;
-  align-items: center;
-  gap: 50px;
+  flex-direction: column; /* default: mobile = atas-bawah */
 }
 
 .textContainer {
   flex: 1;
+}
+
+.titleH1 {
+  margin-top: 50px;
 }
 
 .title {
@@ -49,7 +52,7 @@
   flex: 1;
   height: 350px;
   position: relative;
-  margin: 30px;
+  margin-top: 30px;
 }
 
 .image {
@@ -64,6 +67,11 @@
 .post {
   flex: 5;
   margin-top: 60px;
+}
+
+.description {
+  margin-bottom: 1em;
+  line-height: 1.8;
 }
 
 .description p {
@@ -83,8 +91,14 @@
   }
 }
 @media screen and (max-width: 1024px) {
+  .infoContainer {
+    display: flex;
+    flex-direction: column; /* default: mobile = atas-bawah */
+  }
+
+  .textContainer,
   .imageContainer {
-    display: none;
+    flex: 1;
   }
 }
 @media screen and (max-width: 640px) {
@@ -100,12 +114,10 @@
 /*Page Post Input*/
 
 .content {
-  line-height: 1.8;
   font-size: 1rem;
 }
 
 .content p {
-  margin-bottom: 1em;
   text-align: justify;
 }
 .content ul {
@@ -139,3 +151,33 @@
   margin: 1rem 0;
 }
   */
+.user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.userImageContainer {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.avatar {
+  object-fit: cover;
+  border-radius: 999px;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.image {
+  object-fit: cover;
+  border-radius: 12px;
+}

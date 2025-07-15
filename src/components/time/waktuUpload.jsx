@@ -10,4 +10,13 @@ function WaktuUpload({ waktuUnggah }) {
   return <span>{waktuRelatif}</span>;
 }
 
+function WaktuSekarang({ waktuUnggah }) {
+  const waktuRelatif = formatDistanceToNow(new Date(waktuUnggah), {
+    addSuffix: true,
+    locale: id, // Gunakan locale bahasa Indonesia
+  });
+
+  return <span>{waktuRelatif}</span>;
+}
+
 export default WaktuUpload;
