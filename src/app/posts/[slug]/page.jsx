@@ -61,7 +61,7 @@ const SinglePage = async ({ params }) => {
         <div className={styles.post}>
           <div className={styles.deschead}>
             <div
-              className={styles.description}
+              className={`${styles.description} ql-indent-1`}
               dangerouslySetInnerHTML={{ __html: data?.desc }}
             />
           </div>

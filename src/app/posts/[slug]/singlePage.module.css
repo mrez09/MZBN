@@ -79,6 +79,9 @@
   font-weight: 300;
   margin-bottom: 20px;
 }
+.description li::before {
+  position: absolute;
+}
 
 @media screen and (max-width: 1536px) {
   .title {

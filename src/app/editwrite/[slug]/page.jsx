@@ -164,24 +164,6 @@ const EditWrite = () => {
     xhr.send(jsonBody);
   };
 
-  //react quil
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, 3, false] }],
-      [{ font: [] }],
-      [{ size: [] }],
-      ["bold", "italic", "underline", "strike"],
-      [{ color: [] }, { background: [] }],
-      [{ script: "sub" }, { script: "super" }],
-      [{ list: "ordered" }, { list: "bullet" }],
-      [{ indent: "-1" }, { indent: "+1" }],
-      [{ align: [] }],
-      ["blockquote", "code-block"],
-      ["link", "image", "video"],
-      ["clean"],
-    ],
-  };
-
   //session
   const { status, data: session } = useSession();
 
