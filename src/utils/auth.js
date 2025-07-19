@@ -30,13 +30,13 @@ export const authOptions = {
       return token;
     },
     async session({ session, token }) {
-      console.log("🐛 SESSION DEBUG:", { token, session });
+      //console.log("🐛 SESSION DEBUG:", { token, session });
       //session.user.role = token.role; // Ambil role dari token, bukan user
       // Tambahkan pengecekan aman
       if (token?.role) {
         session.user.role = token.role;
       }
-      console.log("🛡️ FINAL ROLE:", session.user.role);
+      //console.log("🛡️ FINAL ROLE:", session.user.role);
       return session;
     },
   },

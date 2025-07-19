@@ -110,3 +110,17 @@ a {
   content: "- ";
   left: 20px;
 }
+/**hljs*/
+/* tambahkan pembungkus */
+.hljs-wrapper pre code {
+  /* highlight.js theme akan tetap berlaku DI SINI */
+}
+
+.hljs-wrapper pre {
+  background: #1e1e1e; /* atau sesuai tema */
+  padding: 1em;
+  overflow-x: auto;
+  border-radius: 6px;
+}
+
+/* jangan override style global lain */

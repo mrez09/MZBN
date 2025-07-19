@@ -7,8 +7,13 @@ import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
 import Quill from "quill";
 import styles from "./RichEditor.module.css";
+import hljs from "highlight.js";
+import "highlight.js/styles/github-dark.css";
 
 const modules = {
+  syntax: {
+    highlight: (text) => hljs.highlightAuto(text).value,
+  },
   toolbar: [
     [{ header: [1, 2, 3, false] }],
     [{ font: [] }],
@@ -22,6 +27,7 @@ const modules = {
     ["blockquote", "code-block"],
     ["link", "image", "video"],
     ["clean"],
+    [{ "code-block-custom": ["javascript", "html", "css"] }],
   ],
 };
 

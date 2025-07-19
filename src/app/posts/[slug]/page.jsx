@@ -6,6 +6,7 @@ import Comments from "@/components/comments/Comments";
 import WaktuSekarang from "../../../components/time/waktuUpload";
 import { format, compareAsc } from "date-fns";
 import { id } from "date-fns/locale";
+import HighlightClient from "@/components/highlight/HighlightClient";
 
 const getData = async (slug) => {
   const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
@@ -18,11 +19,41 @@ const getData = async (slug) => {
 
   return res.json();
 };
+//Nlock Page
+function splitHtmlToBlocks(html) {
+  const blocks = [];
+  const regex = /<pre class="language-(\w+)">([\s\S]*?)<\/pre>/g;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(html)) !== null) {
+    const before = html.slice(lastIndex, match.index);
+    if (before.trim()) {
+      blocks.push({ type: "html", html: before });
+    }
+
+    blocks.push({
+      type: "code",
+      lang: match[1],
+      html: `<pre><code class="language-${match[1]}">${match[2]}</code></pre>`,
+    });
+
+    lastIndex = regex.lastIndex;
+  }
+
+  const after = html.slice(lastIndex);
+  if (after.trim()) {
+    blocks.push({ type: "html", html: after });
+  }
+
+  return blocks;
+}
 
 const SinglePage = async ({ params }) => {
   const { slug } = params;
 
   const data = await getData(slug);
+  const contentBlocks = splitHtmlToBlocks(data?.desc || "");
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
@@ -60,8 +91,10 @@ const SinglePage = async ({ params }) => {
       <div className={styles.content}>
         <div className={styles.post}>
           <div className={styles.deschead}>
+            <HighlightClient />
+
             <div
-              className={`${styles.description} ql-indent-1`}
+              className={styles.description}
               dangerouslySetInnerHTML={{ __html: data?.desc }}
             />
           </div>
