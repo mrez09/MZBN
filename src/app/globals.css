@@ -122,5 +122,12 @@ a {
   overflow-x: auto;
   border-radius: 6px;
 }
+.ql-syntax {
+  background: #1e1e1e; /* atau sesuai tema */
+  padding: 1em;
+  overflow-x: auto;
+  border-radius: 6px;
+  color: white;
+}
 
 /* jangan override style global lain */
