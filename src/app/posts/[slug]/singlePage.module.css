@@ -67,11 +67,13 @@
 .post {
   flex: 5;
   margin-top: 60px;
+  width: 100%;
 }
 
 .description {
   margin-bottom: 1em;
   line-height: 1.8;
+  width: 100%;
 }
 
 .description p {
@@ -81,6 +83,9 @@
 }
 .description li::before {
   position: absolute;
+}
+.description img {
+  width: 100%;
 }
 
 @media screen and (max-width: 1536px) {

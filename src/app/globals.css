@@ -53,10 +53,16 @@ a {
   .wrapper {
     max-width: 1366px;
   }
+  .ql-syntax {
+    width: 700px;
+  }
 }
 @media screen and (max-width: 1280px) {
   .wrapper {
     max-width: 1024px;
+  }
+  .ql-syntax {
+    width: 550px;
   }
 }
 @media screen and (max-width: 1024px) {
@@ -65,15 +71,24 @@ a {
     padding-left: 40px;
     padding-right: 40px;
   }
+  .ql-syntax {
+    width: 620px;
+  }
 }
 @media screen and (max-width: 768px) {
   .wrapper {
     max-width: 640px;
   }
+  .ql-syntax {
+    width: 500px;
+  }
 }
 @media screen and (max-width: 640px) {
   .wrapper {
     max-width: 475px;
+  }
+  .ql-syntax {
+    width: 400px;
   }
 }
 /**Quil**/
@@ -128,6 +143,9 @@ a {
   overflow-x: auto;
   border-radius: 6px;
   color: white;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 700px;
 }
 
 /* jangan override style global lain */

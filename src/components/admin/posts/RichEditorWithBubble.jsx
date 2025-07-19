@@ -1,7 +1,7 @@
 // RichEditorWithBubble.jsx
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useMemo } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
@@ -9,32 +9,140 @@ import Quill from "quill";
 import styles from "./RichEditor.module.css";
 import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
+import { toast } from "react-toastify";
+import "@/lib/quilResize";
 
-const modules = {
-  syntax: {
-    highlight: (text) => hljs.highlightAuto(text).value,
-  },
-  toolbar: [
-    [{ header: [1, 2, 3, false] }],
-    [{ font: [] }],
-    [{ size: [] }],
-    ["bold", "italic", "underline", "strike"],
-    [{ color: [] }, { background: [] }],
-    [{ script: "sub" }, { script: "super" }],
-    [{ list: "ordered" }, { list: "bullet" }],
-    [{ indent: "-1" }, { indent: "+1" }],
-    [{ align: [] }],
-    ["blockquote", "code-block"],
-    ["link", "image", "video"],
-    ["clean"],
-    [{ "code-block-custom": ["javascript", "html", "css"] }],
-  ],
-};
+// 2. Modules-nya setelah itu
+//const modules = {
+//  syntax: {
+//    highlight: (text) => hljs.highlightAuto(text).value,
+//  },
+//  toolbar: {
+//    container: [
+//      [{ header: [1, 2, 3, false] }],
+//      [{ font: [] }],
+//      [{ size: [] }],
+//      ["bold", "italic", "underline", "strike"],
+//      [{ color: [] }, { background: [] }],
+//      [{ script: "sub" }, { script: "super" }],
+//      [{ list: "ordered" }, { list: "bullet" }],
+//      [{ indent: "-1" }, { indent: "+1" }],
+//      [{ align: [] }],
+//      ["blockquote", "code-block"],
+//      ["link", "image", "video"],
+//      ["clean"],
+//      [{ "code-block-custom": ["javascript", "html", "css"] }],
+//    ],
+//    handlers: {
+//      image: imageHandler,
+//    },
+//  },
+//};
 
 const RichEditorWithBubble = ({ value, onChange }) => {
   const quillRef = useRef(null);
   const bubbleRef = useRef(null);
 
+  //image quill
+  // 1. Handler-nya dulu
+  const imageHandler = () => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files?.[0];
+      if (!file) {
+        toast.warning("Tidak ada file yang dipilih.");
+        return;
+      }
+
+      toast.info("Mengunggah gambar...");
+
+      const formData = new FormData();
+      formData.append("image", file);
+
+      try {
+        const res = await fetch("/api/admin/uploadQuill", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await res.json();
+        toast.success("Gambar berhasil diunggah!");
+
+        if (data.success && data.url) {
+          const quill = quillRef.current.getEditor();
+          const range = quill.getSelection(true);
+          quill.insertEmbed(range.index, "image", data.url);
+          quill.setSelection(range.index + 1);
+
+          toast.success("Gambar berhasil diunggah!");
+        } else {
+          toast.error("Upload gagal: " + data.message || "Tidak diketahui");
+        }
+      } catch (error) {
+        console.error("Upload error:", error);
+        toast.error("Terjadi kesalahan saat upload.");
+      }
+    };
+  };
+
+  const modules = useMemo(
+    () => ({
+      syntax: {
+        highlight: (text) => hljs.highlightAuto(text).value,
+      },
+      toolbar: {
+        container: [
+          [{ header: [1, 2, 3, false] }],
+          [{ font: [] }],
+          [{ size: [] }],
+          ["bold", "italic", "underline", "strike"],
+          [{ color: [] }, { background: [] }],
+          [{ script: "sub" }, { script: "super" }],
+          [{ list: "ordered" }, { list: "bullet" }],
+          [{ indent: "-1" }, { indent: "+1" }],
+          [{ align: [] }],
+          ["blockquote", "code-block"],
+          ["link", "image", "video"],
+          ["clean"],
+          [{ "code-block-custom": ["javascript", "html", "css"] }],
+        ],
+        handlers: {
+          image: () => {
+            const input = document.createElement("input");
+            input.setAttribute("type", "file");
+            input.setAttribute("accept", "image/*");
+            input.click();
+
+            input.onchange = async () => {
+              const file = input.files[0];
+              const formData = new FormData();
+              formData.append("file", file);
+
+              const res = await fetch("/api/admin/uploadQuill", {
+                method: "POST",
+                body: formData,
+              });
+
+              const data = await res.json();
+              const quill = quillRef.current.getEditor();
+              const range = quill.getSelection();
+              quill.insertEmbed(range.index, "image", data.url);
+            };
+          },
+          imageResize: {
+            parchment: Quill.import("parchment"),
+          },
+        },
+      },
+    }),
+    []
+  );
+
+  //block
   useEffect(() => {
     const quill = quillRef.current?.getEditor();
     if (!quill) return;
