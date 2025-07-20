@@ -10,19 +10,39 @@ const imagekit = new ImageKit({
 export const POST = async (req) => {
   const data = await req.formData();
   const file = data.get("file");
+  const oldFileId = data.get("oldFileId"); // ambil dari FormData
+
+  if (!file) {
+    return NextResponse.json({ error: "File is required" }, { status: 400 });
+  }
+
   const buffer = await file.arrayBuffer();
   const base64 = Buffer.from(buffer).toString("base64");
 
   try {
-    const res = await imagekit.upload({
+    // ✅ Hapus gambar lama jika ada
+    if (oldFileId) {
+      try {
+        await imagekit.deleteFile(oldFileId);
+        console.log("Deleted old file:", oldFileId);
+      } catch (delErr) {
+        console.warn("Failed to delete old file:", delErr.message);
+      }
+    }
+
+    // ✅ Upload gambar baru
+    const uploadRes = await imagekit.upload({
       file: `data:${file.type};base64,${base64}`,
       fileName: file.name,
     });
 
-    return NextResponse.json({ url: res.url });
+    return NextResponse.json({
+      url: uploadRes.url,
+      fileId: uploadRes.fileId,
+    });
   } catch (err) {
     console.error("Upload error:", err.message);
-    return NextResponse.json({ message: "Upload failed" }, { status: 500 });
+    return NextResponse.json({ error: "Upload failed" }, { status: 500 });
   }
 };
 
