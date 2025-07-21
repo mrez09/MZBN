@@ -1,38 +1,37 @@
 import { NextResponse } from "next/server";
-import ImageKit from "imagekit";
+//import ImageKit from "imagekit";
+import imagekit from "@/lib/imagekit";
 
-const imagekit = new ImageKit({
-  publicKey: process.env.IMAGEKIT_PUBLIC,
-  privateKey: process.env.IMAGEKIT_PRIVATE,
-  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
-});
+//const imagekit = new ImageKit({
+//  publicKey: process.env.IMAGEKIT_PUBLIC,
+//  privateKey: process.env.IMAGEKIT_PRIVATE,
+//  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
+//});
 
 export const POST = async (req) => {
   const data = await req.formData();
   const file = data.get("file");
-  const oldFileId = data.get("oldFileId"); // ambil dari FormData
+  const oldFileId = data.get("oldFileId");
 
   if (!file) {
     return NextResponse.json({ error: "File is required" }, { status: 400 });
   }
 
   const buffer = await file.arrayBuffer();
-  const base64 = Buffer.from(buffer).toString("base64");
 
   try {
     // ✅ Hapus gambar lama jika ada
     if (oldFileId) {
       try {
         await imagekit.deleteFile(oldFileId);
-        console.log("Deleted old file:", oldFileId);
-      } catch (delErr) {
-        console.warn("Failed to delete old file:", delErr.message);
+      } catch (err) {
+        console.warn("Gagal hapus file lama:", err.message);
       }
     }
 
-    // ✅ Upload gambar baru
+    // ✅ Upload file (pakai buffer langsung)
     const uploadRes = await imagekit.upload({
-      file: `data:${file.type};base64,${base64}`,
+      file: Buffer.from(buffer), // ⬅️ ini pakai buffer langsung, bukan base64
       fileName: file.name,
     });
 
@@ -41,11 +40,10 @@ export const POST = async (req) => {
       fileId: uploadRes.fileId,
     });
   } catch (err) {
-    console.error("Upload error:", err.message);
+    console.error("Upload gagal:", err.message);
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });
   }
 };
-
 // PUT: Update post dari aichan
 export const PUT = async (req, { params }) => {
   const session = await getAuthSession();

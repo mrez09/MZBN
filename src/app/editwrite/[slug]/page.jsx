@@ -60,19 +60,19 @@ const EditWrite = () => {
         const data = await res.json();
         setTitle(data.title);
         setDesc(data.desc);
-        setCatSlug(data.catSlug || ""); // ini yang dikirim ke CategorySelect
+        setCatSlug(data.catSlug || "");
         setIsFeatured(data.isFeatured);
         setPostStatus(data.postStatus);
         setStartDate(new Date(data.createdAt));
         setImageUrl(data.image || "");
-        setOldImageFileId(data.imageFileId || "");
-        console.log("Set kategori:", data.catSlug); // tambahkan setelah fetch
-        console.log("Current state:", catSlug);
+        setImageFileId(data.imageFileId || "");
+        setOldImageFileId(data.imageFileId || ""); // simpan file lama
+        setPreview(data.image || "");
       } catch (err) {
         console.error("Fetch error:", err);
       }
     };
-    console.log("✅ catSlug ter-update:", catSlug);
+
     if (slug) fetchPost();
   }, [slug]);
 
@@ -86,6 +86,7 @@ const EditWrite = () => {
 
     const formData = new FormData();
     formData.append("file", selectedFile);
+    if (imageFileId) formData.append("oldFileId", imageFileId);
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/upload");
@@ -102,17 +103,17 @@ const EditWrite = () => {
       if (xhr.status === 200) {
         const res = JSON.parse(xhr.responseText);
         setImageUrl(res.url);
-        setImageFileId(res.fileId); // ✅ simpan ID baru
+        setImageFileId(res.fileId);
         setPreview(res.url);
-        toast.success("Berhasil diUpload!");
+        toast.success("Berhasil upload gambar!");
       } else {
-        toast.error("Upload gagal!");
+        toast.error("Gagal upload");
       }
     };
 
     xhr.onerror = () => {
       setUploading(false);
-      toast.error("Terjadi kesalahan saat mengupload!");
+      toast.error("Error saat upload!");
     };
 
     xhr.send(formData);
@@ -159,6 +160,7 @@ const EditWrite = () => {
       createdAt: startDate,
       image: imageUrl,
       imageFileId,
+      oldImageFileId,
     });
 
     xhr.send(jsonBody);
