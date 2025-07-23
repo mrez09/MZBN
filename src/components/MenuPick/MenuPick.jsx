@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import WaktuUpload from "../time/waktuUpload";
 
-const getData = async (page, cat) => {
+/*const getData = async (page, cat) => {
   const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
   //coba ulang
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/pick`, {
@@ -17,7 +17,7 @@ const getData = async (page, cat) => {
 
   return res.json();
 };
-
+*/
 const MenuPick = async ({ withImage }) => {
   const data = await getData();
 

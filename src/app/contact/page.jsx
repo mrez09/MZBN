@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import styles from "./contact.module.css";
 import { FaClock, FaMapLocation, FaPhone } from "react-icons/fa6";
-import Contact from "@/components/contact/Contact";
+//komen compile vercel
+//import Contact from "@/components/contact/Contact";
 
 const ContactPage = () => {
   const [name, setName] = useState("");
