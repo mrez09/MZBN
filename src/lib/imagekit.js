@@ -5,10 +5,10 @@ const imagekit = new ImageKit({
   privateKey: process.env.IMAGEKIT_PRIVATE,
   urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
 });
-console.log("Env check:", {
-  pub: process.env.IMAGEKIT_PUBLIC,
-  priv: process.env.IMAGEKIT_PRIVATE,
-  url: process.env.IMAGEKIT_URL_ENDPOINT,
-});
+//console.log("Env check:", {
+  //pub: process.env.IMAGEKIT_PUBLIC,
+  //priv: process.env.IMAGEKIT_PRIVATE,
+  //url: process.env.IMAGEKIT_URL_ENDPOINT,
+//});
 
 export default imagekit;
