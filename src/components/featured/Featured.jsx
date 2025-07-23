@@ -30,7 +30,15 @@ const Featured = async () => {
 
             <div className={styles.post}>
               <div className={styles.imgContainer}>
-                <Image className={styles.image} src={item.image} alt="" fill />
+                <Image
+                  className={styles.image}
+                  src={item.image}
+                  alt=""
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: "100%", height: "100%" }}
+                />
               </div>
               <div className={styles.textContainer}>
                 <h1 className={styles.postTitle}>{item.title}</h1>
