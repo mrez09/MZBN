@@ -12,9 +12,8 @@ export const GET = async () => {
     return NextResponse.json(categories);
   } catch (err) {
     console.error("Kategori fetch error:", err);
-    return NextResponse.json(
-      { message: "Something went wrong!" },
-      { status: 500 }
+    return (
+      NextResponse.json({ message: "Something went wrong!" }), { status: 500 }
     );
   }
 };

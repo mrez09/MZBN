@@ -10,9 +10,8 @@ export const GET = async () => {
     return NextResponse.json(posts);
   } catch (err) {
     console.error(err);
-    return NextResponse.json(
-      { message: "Error fetching posts" },
-      { status: 500 }
+    return (
+      NextResponse.json({ message: "Error fetching posts" }), { status: 500 }
     );
   }
 };
