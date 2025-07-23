@@ -10,7 +10,7 @@ const ListPost = () => {
     const fetchPosts = async () => {
       //const res = await fetch("/api//admin/posts");
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/api/postsadmin`
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/postsadmin2`
       );
       const data = await res.json();
       setPosts(data);
