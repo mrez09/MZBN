@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import WaktuUpload from "../time/waktuUpload";
 
-/*const getData = async (page, cat) => {
+const getData = async (page, cat) => {
   const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/popular`, {
     cache: "no-store",
@@ -16,7 +16,6 @@ import WaktuUpload from "../time/waktuUpload";
 
   return res.json();
 };
-*/
 
 const MenuPosts = async ({ withImage }) => {
   const data = await getData();

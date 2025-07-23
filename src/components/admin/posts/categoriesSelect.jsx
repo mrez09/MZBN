@@ -7,7 +7,7 @@ export default function CategorySelect({ value, onChange }) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    /*const fetchCategories = async () => {
+    const fetchCategories = async () => {
       try {
         const res = await fetch("/api/admin/categories");
         const data = await res.json();
@@ -16,7 +16,7 @@ export default function CategorySelect({ value, onChange }) {
         console.error("Gagal ambil kategori:", error);
       }
     };
-    fetchCategories();*/
+    fetchCategories();
   }, []);
 
   const options = categories.map((cat) => ({
