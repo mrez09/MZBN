@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./categoriesSelect.module.css";
 import Select from "react-select";
+export const dynamic = "force-dynamic";
 
 export default function CategorySelect({ value, onChange }) {
   const [categories, setCategories] = useState([]);
