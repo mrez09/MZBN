@@ -118,7 +118,7 @@ const Writepage = () => {
     formData.append("isFeatured", isFeatured);
     formData.append("createdAt", startDate.toISOString());
     formData.append("imageUrl", imageUrl);
-    formData.append("status", postStatus);
+    formData.append("postStatus", postStatus);
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/posts");

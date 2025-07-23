@@ -39,7 +39,7 @@ const ListPost = () => {
     columnHelper.accessor("catSlug", {
       header: "Kategori",
     }),
-    columnHelper.accessor("status", {
+    columnHelper.accessor("postStatus", {
       header: "Status",
       cell: (info) => {
         const status = info.getValue();
@@ -91,7 +91,7 @@ const ListPost = () => {
   ];
 
   useEffect(() => {
-    fetch("/api/postsadmin2")
+    fetch("/api/admin/posts")
       .then((res) => res.json())
       .then((posts) => setData(posts));
   }, []);

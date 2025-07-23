@@ -59,31 +59,44 @@ export const POST = async (req) => {
   try {
     const formData = await req.formData();
 
-    //const file = formData.get("file");
     const title = formData.get("title");
     const desc = formData.get("desc");
     const slug = formData.get("slug");
     const catSlug = formData.get("catSlug");
-    //    const isFeatured = formData.get("isFeatured");
     const isFeaturedRaw = formData.get("isFeatured");
     const isFeatured = isFeaturedRaw === "true";
     const createdAt = formData.get("createdAt");
-    const status = formData.get("status");
-
+    const postStatus = formData.get("postStatus");
     const imageUrl = formData.get("imageUrl");
 
-    //if (file) {
-    //const buffer = Buffer.from(await file.arrayBuffer());
+    // Debugging - log semua isi
+    console.log("🔎 Form Data:", {
+      title,
+      desc,
+      slug,
+      catSlug,
+      isFeatured,
+      createdAt,
+      postStatus,
+      imageUrl,
+      userEmail: session.user?.email,
+    });
 
-    //const uploadResult = await imagekit.upload({
-    // file: buffer,
-    // fileName: file.name,
-    //});
+    // Validasi minimal
+    if (
+      !title ||
+      !desc ||
+      !slug ||
+      !catSlug ||
+      !createdAt ||
+      !imageUrl ||
+      !postStatus
+    ) {
+      return new NextResponse(JSON.stringify({ message: "Field is missing" }), {
+        status: 400,
+      });
+    }
 
-    //imageUrl = uploadResult.url;
-    //}
-
-    // ✅ Ini penting! Simpan semua ke Prisma
     const post = await prisma.post.create({
       data: {
         title,
@@ -91,8 +104,8 @@ export const POST = async (req) => {
         slug,
         catSlug,
         isFeatured,
-        createdAt,
-        status,
+        createdAt: new Date(createdAt),
+        postStatus,
         image: imageUrl,
         userEmail: session.user.email,
       },
@@ -100,9 +113,9 @@ export const POST = async (req) => {
 
     return new NextResponse(JSON.stringify(post), { status: 200 });
   } catch (err) {
-    console.error("POST ERROR:", err);
+    console.error("❌ POST ERROR:", err);
     return new NextResponse(
-      JSON.stringify({ message: "Something went wrong! Internet Lost" }),
+      JSON.stringify({ message: "Something went wrong!", error: err.message }),
       { status: 500 }
     );
   }
