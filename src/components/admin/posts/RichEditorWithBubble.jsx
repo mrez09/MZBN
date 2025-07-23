@@ -64,7 +64,7 @@ const RichEditorWithBubble = ({ value, onChange }) => {
       formData.append("image", file);
 
       try {
-        const res = await fetch("/api/admin/uploadQuill", {
+        const res = await fetch("/api/uploadQuill", {
           method: "POST",
           body: formData,
         });
@@ -123,7 +123,7 @@ const RichEditorWithBubble = ({ value, onChange }) => {
               formData.append("file", file);
 
               const res = await fetch(
-                `${process.env.NEXT_PUBLIC_SITE_URL}/api/admin/uploadQuill`,
+                `${process.env.NEXT_PUBLIC_SITE_URL}/api/uploadQuill`,
                 {
                   method: "POST",
                   body: formData,

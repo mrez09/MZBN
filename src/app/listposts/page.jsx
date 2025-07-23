@@ -91,7 +91,7 @@ const ListPost = () => {
   ];
 
   useEffect(() => {
-    fetch("/api/admin/posts")
+    fetch("/api/postsadmin")
       .then((res) => res.json())
       .then((posts) => setData(posts));
   }, []);

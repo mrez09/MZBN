@@ -10,9 +10,9 @@ export default function CategorySelect({ value, onChange }) {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        //const res = await fetch("/api/admin/categories");
+        //const res = await fetch("/api//admin//categories");
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_SITE_URL}/api/admin/categories`
+          `${process.env.NEXT_PUBLIC_SITE_URL}/api/categoriesadmin`
         );
         const data = await res.json();
         setCategories(data);
