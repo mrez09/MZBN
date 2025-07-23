@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
-import authOptions from "@/utils/auth";
+//import authOptions from "@/utils/auth";
+import { authOptions } from "@/utils/auth";
 
 // ⛔ Mencegah eksekusi saat build static
 export const dynamic = "force-dynamic";
