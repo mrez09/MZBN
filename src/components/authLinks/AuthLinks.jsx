@@ -33,15 +33,27 @@ const AuthLinks = () => {
       </div>
       {open && (
         <div className={styles.responsiveMenu}>
-          <Link href="/">HomePage</Link>
-          <Link href="/">About</Link>
-          <Link href="/">Contact</Link>
-          {status === "notauthenticated" ? (
-            <Link href="/login">Login</Link>
+          <Link href="/" onClick={() => setOpen(false)}>
+            HomePage
+          </Link>
+          <Link href="/about" onClick={() => setOpen(false)}>
+            About
+          </Link>
+          <Link href="/contact" onClick={() => setOpen(false)}>
+            Contact
+          </Link>
+          {status === "unauthenticated" ? (
+            <Link href="/login" onClick={() => setOpen(false)}>
+              Login
+            </Link>
           ) : (
             <>
-              <Link href="/write">Write</Link>
-              <span style={styles.link}>Logout</span>
+              <Link href="/write" onClick={() => setOpen(false)}>
+                Write
+              </Link>
+              <span className={styles.link} onClick={signOut}>
+                Logout
+              </span>
             </>
           )}
         </div>

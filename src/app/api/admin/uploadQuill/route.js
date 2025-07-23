@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import imagekit from "@/lib/imagekit"; // pastikan sudah disiapkan
+export const dynamic = "force-dynamic";
 
 export async function POST(req) {
   try {

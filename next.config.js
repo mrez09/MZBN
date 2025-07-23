@@ -10,6 +10,8 @@ const nextConfig = {
     // ❗Ini yang penting: lewati error ESLint saat build (misal di Vercel)
     ignoreDuringBuilds: true,
   },
+  //output: "export",
+  // tambahkan opsi lain kalau perlu
 };
 
 module.exports = nextConfig;

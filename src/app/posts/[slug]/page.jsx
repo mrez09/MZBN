@@ -9,9 +9,12 @@ import { id } from "date-fns/locale";
 import HighlightClient from "@/components/highlight/HighlightClient";
 
 const getData = async (slug) => {
-  const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/posts/${slug}`,
+    {
+      cache: "no-store",
+    }
+  );
   const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
   if (!res.ok) {
     throw new Error("Failed");
