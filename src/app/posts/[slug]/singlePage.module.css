@@ -103,6 +103,9 @@
     display: flex;
     flex-direction: column; /* default: mobile = atas-bawah */
   }
+  .content {
+    flex-direction: column;
+  }
 
   .textContainer,
   .imageContainer {
