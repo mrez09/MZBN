@@ -6,7 +6,8 @@ import Image from "next/image";
 
 const getData = async () => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/categories`,
+    //`${process.env.NEXT_PUBLIC_SITE_URL}/api/categories`,
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/kategori`,
     {
       cache: "no-store",
     }
