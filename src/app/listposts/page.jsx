@@ -91,9 +91,13 @@ const ListPost = () => {
   ];
 
   useEffect(() => {
-    fetch("/api/admin/posts")
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/admin/posts`)
       .then((res) => res.json())
       .then((posts) => setData(posts));
+    console.log(
+      "FETCHING FROM:",
+      `${process.env.NEXT_PUBLIC_SITE_URL}/api/admin/posts`
+    );
   }, []);
 
   const handleDelete = async (slug) => {

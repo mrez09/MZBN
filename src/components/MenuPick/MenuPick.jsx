@@ -41,7 +41,7 @@ const MenuPick = async ({ withImage }) => {
             </span>
             <h3 className={styles.postTitle}>{item.title}</h3>
             <div className={styles.detail}>
-              <span className={styles.username}>{item.user.name} - </span>
+              <span className={styles.username}>{item.user_id.name} - </span>
               <span className={styles.date}>
                 <WaktuUpload waktuUnggah={item.createdAt} />
               </span>
