@@ -90,6 +90,7 @@ const ListPost = () => {
     }),
   ];
 
+  /*
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/admin/posts`)
       .then((res) => res.json())
@@ -98,6 +99,18 @@ const ListPost = () => {
       "FETCHING FROM:",
       `${process.env.NEXT_PUBLIC_SITE_URL}/api/admin/posts`
     );
+  }, []);*/
+
+  useEffect(() => {
+    const url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/admin/posts`;
+    console.log("FETCHING FROM:", url);
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) throw new Error("Fetch failed: " + res.status);
+        return res.json();
+      })
+      .then((posts) => setData(posts))
+      .catch((err) => console.error("Fetch error:", err));
   }, []);
 
   const handleDelete = async (slug) => {
