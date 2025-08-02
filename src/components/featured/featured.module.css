@@ -48,8 +48,22 @@
   border: none;
   border-radius: 5px;
   width: max-content;
-  background-color: var(--buttonColor); /* optional */
-  color: white; /* optional */
+  background-color: #4682a9; /* optional 
+  color: white;*/ /* optional */
+  cursor: pointer;
+  font-weight: 800;
+  color: white;
+}
+
+.button:hover {
+  padding: 16px 20px;
+  background-color: #749bc2;
+  border: none;
+  border-radius: 5px;
+  width: max-content;
+  /*background-color: var(--buttonColor); /* optional 
+  color: white;*/ /* optional */
+  cursor: pointer;
 }
 
 /* === RESPONSIVE === */

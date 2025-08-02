@@ -51,7 +51,7 @@ const Featured = async () => {
                     __html: item.desc.substring(0, 150),
                   }}
                 />
-                <Link href={`/posts/${item.slug}`}>
+                <Link href={`/posts/${item.slug}`} className={styles.btnRead}>
                   <button className={styles.button}>Read More</button>
                 </Link>
               </div>
