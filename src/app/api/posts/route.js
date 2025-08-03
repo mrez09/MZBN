@@ -97,6 +97,17 @@ export const POST = async (req) => {
       });
     }
 
+    const dbUser = await prisma.user.findUnique({
+      where: { email: session.user.email },
+      select: { id: true },
+    });
+
+    if (!dbUser) {
+      return new NextResponse(JSON.stringify({ message: "User not found" }), {
+        status: 404,
+      });
+    }
+
     const post = await prisma.post.create({
       data: {
         title,
