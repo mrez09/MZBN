@@ -108,6 +108,7 @@ export const POST = async (req) => {
         postStatus,
         image: imageUrl,
         userEmail: session.user.email,
+        user_id: session.user.id,
       },
     });
 

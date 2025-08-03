@@ -24,6 +24,7 @@ export const authOptions = {
         });
 
         // Jika user belum ada di DB, ini bisa error → PrismaAdapter harus bikin otomatis
+        token.id = dbUser.id;
         token.role = dbUser?.role || "user";
       }
 
@@ -33,6 +34,9 @@ export const authOptions = {
       //console.log("🐛 SESSION DEBUG:", { token, session });
       //session.user.role = token.role; // Ambil role dari token, bukan user
       // Tambahkan pengecekan aman
+      if (token?.id) {
+        session.user.id = token.id;
+      }
       if (token?.role) {
         session.user.role = token.role;
       }
