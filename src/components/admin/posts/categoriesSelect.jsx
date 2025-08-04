@@ -27,11 +27,12 @@ export default function CategorySelect({ value, onChange }) {
   return (
     <div className={styles.group}>
       <label htmlFor="option" className={styles.label}>
-        Kategori
+        Katego
       </label>
 
       <Select
         options={options}
+        className={styles.kategoriSelect}
         value={options.find((opt) => opt.value === value)}
         onChange={(selected) => onChange({ target: { value: selected.value } })}
         styles={{
