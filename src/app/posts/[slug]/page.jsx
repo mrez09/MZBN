@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import React from "react";
 import styles from "./singlePage.module.css";
 import Image from "next/image";
@@ -17,8 +18,12 @@ const getData = async (slug) => {
   );
   const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
   if (!res.ok) {
-    throw new Error("Failed");
+    //throw new Error("Failed");
+    notFound();
   }
+  //if (!data) {
+  // akan me-render app/not-found.js
+  //}
 
   return res.json();
 };
