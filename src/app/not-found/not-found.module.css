@@ -1,0 +1,107 @@
+.container {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  font-family: "Courier New", monospace;
+  text-align: center;
+}
+
+.typing::after {
+  content: "|";
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.backLink {
+  margin-top: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+  z-index: 1;
+}
+
+/*dark*/
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite ease-in-out;
+  opacity: 0.8;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* light */
+.sky {
+  background: #dbeeff; /* Langit terang */
+  overflow: hidden;
+  height: 100vh;
+  position: relative;
+}
+
+/* CLOUDS */
+.cloudsContainer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* CLOUDS */
+/* CLOUDS */
+.cloudsContainer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.cloud {
+  position: absolute;
+  animation-name: floatCloud;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes floatCloud {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(120vw);
+  }
+}

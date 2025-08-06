@@ -17,21 +17,19 @@ const getData = async (slug) => {
     }
   );
   const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
-  if (!res.ok) {
-    notFound(); // ini penting, harus ada
-  }
+  if (!res.ok) notFound();
 
   const data = await res.json();
-
-  if (!data || !data.name) {
-    // Kalau datanya kosong/null
+  if (!data || !data?.user?.name) {
     notFound();
+    return;
   }
   //if (!data) {
   // akan me-render app/not-found.js
   //}
 
-  return res.json();
+  //return res.json();
+  return data;
 };
 //Nlock Page
 function splitHtmlToBlocks(html) {
