@@ -18,7 +18,13 @@ const getData = async (slug) => {
   );
   const waktuUnggah = new Date(); // Contoh: Waktu unggah saat ini
   if (!res.ok) {
-    //throw new Error("Failed");
+    notFound(); // ini penting, harus ada
+  }
+
+  const data = await res.json();
+
+  if (!data || !data.name) {
+    // Kalau datanya kosong/null
     notFound();
   }
   //if (!data) {
