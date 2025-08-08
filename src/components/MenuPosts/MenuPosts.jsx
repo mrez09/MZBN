@@ -24,22 +24,29 @@ const MenuPosts = async ({ withImage }) => {
     <div className={styles.items}>
       {data?.map((item) => (
         <div key={item.id}>
-          <Link className={styles.item} href={`/posts/${item.slug}`}>
+          <div className={styles.item}>
             {withImage && (
               <div className={styles.imageContainer}>
-                <Image
-                  className={styles.image}
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                />
+                <Link href={`/posts/${item.slug}`}>
+                  <Image
+                    className={styles.image}
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                  />
+                </Link>
               </div>
             )}
+
             <div className={styles.textContainer}>
-              <span className={`${styles.category} ${styles[item.cat.slug]}`}>
-                {item.cat.title}
-              </span>
-              <h3 className={styles.postTitle}>{item.title}</h3>
+              <Link href={`/blog?cat=${item.cat.slug}`}>
+                <span className={`${styles.category} ${styles[item.cat.slug]}`}>
+                  {item.cat.title}
+                </span>
+              </Link>
+              <Link href={`/posts/${item.slug}`}>
+                <h3 className={styles.postTitle}>{item.title}</h3>
+              </Link>
               <div className={styles.detail}>
                 <span className={styles.username}>{item.user.name} - </span>
                 <span className={styles.date}>
@@ -48,7 +55,7 @@ const MenuPosts = async ({ withImage }) => {
                 <p className={styles.date}> dilihat {item.views}</p>
               </div>
             </div>
-          </Link>
+          </div>
         </div>
       ))}
     </div>
