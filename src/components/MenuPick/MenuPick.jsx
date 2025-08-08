@@ -24,7 +24,7 @@ const MenuPick = async ({ withImage }) => {
   return (
     <div className={styles.items}>
       {data?.map((item) => (
-        <Link className={styles.item} href="/">
+        <Link className={styles.item} href={`/posts/${item.slug}`}>
           {withImage && (
             <div className={styles.imageContainer}>
               <Image
